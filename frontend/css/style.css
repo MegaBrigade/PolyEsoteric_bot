@@ -1,0 +1,68 @@
+.geologica-regular {
+  font-family: "Geologica", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 250;
+  font-style: normal;
+  font-variation-settings:
+    "slnt" 0,
+    "CRSV" 0,
+    "SHRP" 0;
+}
+
+.prata-regular {
+  font-family: "Prata", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  font-family: sans-serif;
+  text-align: center;
+  padding: 50px;
+  background-image: url("../assets/background.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: grid;
+  place-items: center;
+}
+
+h1 {
+  font-size: 64px;
+  color: #ffffff;
+  text-align: left;
+}
+
+button {
+    width: 450px;
+    height: 90px;
+    font-size: 48px;
+    color: #ffffff;
+    cursor: pointer;
+    background-color: #222044;
+    border: none;
+    border-radius: 40px;
+    transition: 0.3s;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+#buttonGame {
+  background-image: url("../assets/button_game.svg");
+  background-size: cover;
+  width: 450px;
+  height: 380px;
+  padding-top: 300px;
+  color: #222044;
+}
+
+#downWish {
+  font-size: 32px;
+  color: #ffffff;
+  text-align: right;
+}

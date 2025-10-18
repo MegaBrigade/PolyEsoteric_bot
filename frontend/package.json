@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "Static website for PolyEsotericBot",
   "scripts": {
+    "build": "echo 'Nothing to build'",
     "dev": "python -m http.server 3000"
   }
 }
+

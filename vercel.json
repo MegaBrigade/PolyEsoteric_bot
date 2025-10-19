@@ -1,8 +1,0 @@
-{
-  "version": 2,
-  "public": true,
-  "routes": [
-    { "src": "/(.*)", "dest": "/frontend/$1" }
-  ]
-}
-

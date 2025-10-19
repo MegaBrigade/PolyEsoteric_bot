@@ -20,7 +20,6 @@ body {
   text-align: center;
   padding: 50px;
   background-image: url("../assets/background.svg");
-  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   display: grid;

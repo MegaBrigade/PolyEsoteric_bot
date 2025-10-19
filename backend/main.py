@@ -45,11 +45,8 @@ async def test_api(request: Request):
     return {"reply": reply}
 
 @app.get("/")
-def serve_index():
-    index_path = FRONTEND_DIR / "index.html"
-    if index_path.exists():
-        return FileResponse(index_path)
-    return JSONResponse(content={"error": "index.html not found"}, status_code=404)
+def root():
+    return {"message": "PolyEsoteric API is running"}
 
 if __name__ == "__main__":
     import uvicorn

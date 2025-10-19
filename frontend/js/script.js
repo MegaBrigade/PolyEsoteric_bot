@@ -5,7 +5,7 @@ button.addEventListener('click', async () => {
   response.textContent = 'Отправляю запрос во вселенную...';
 
   try {
-    const res = await fetch('https://polyesoteric-bot.onrender.com', {
+    const res = await fetch('https://polyesoteric-bot.onrender.com/api/test', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ message: 'Хочу узнать свой гороскоп' })

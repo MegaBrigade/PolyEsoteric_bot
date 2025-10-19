@@ -34,8 +34,8 @@ h1 {
 }
 
 button {
-    width: 450px;
-    height: 90px;
+    width: 700px;
+    height: 100px;
     font-size: 48px;
     color: #ffffff;
     cursor: pointer;
@@ -55,9 +55,10 @@ button {
 #buttonGame {
   background-image: url("../assets/button_game.svg");
   background-size: cover;
-  width: 450px;
-  height: 380px;
-  padding-top: 300px;
+  width: 700px;
+  height: 630px;
+  padding-top: 500px;
+  font-size: 54px;
   color: #222044;
 }
 

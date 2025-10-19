@@ -27,10 +27,29 @@ body {
   place-items: center;
 }
 
+.header {
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 20px;
+}
+
 h1 {
-  font-size: 64px;
+  font-size: 72px;
   color: #ffffff;
   text-align: left;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  width: 100%;
+  max-width: 800px;
 }
 
 button {
@@ -49,7 +68,6 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 30px;
 }
 
 #buttonGame {
@@ -62,8 +80,14 @@ button {
   color: #222044;
 }
 
+.footer {
+  margin-top: auto;
+  padding: 50px 0;
+  width: 100%;
+  max-width: 800px;
+}
+
 #downWish {
-  font-size: 32px;
+  font-size: 38px;
   color: #ffffff;
-  text-align: right;
 }

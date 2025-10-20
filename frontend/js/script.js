@@ -16,6 +16,6 @@ button.addEventListener('click', async () => {
   } catch (err) {
     console.error(err);
     response.classList.remove('hidden');
-    response.textContent = 'Будущее туманно...';
+    response.textContent = 'Хрустальный шар говорит, что будущее туманно';
   }
 });

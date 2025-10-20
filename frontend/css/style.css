@@ -1,7 +1,17 @@
-.geologica-regular {
+/* ---------------------------
+   Общие переменные и reset
+   --------------------------- */
+:root{
+  --bg-top:#090D19;
+  --bg-mid:#6265FE;
+  --bg-bottom:#CFE7FF;
+  --accent:#B6BBFF;
+}
+
+.geologica {
   font-family: "Geologica", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 250;
+  font-weight: 700;
   font-style: normal;
   font-variation-settings:
     "slnt" 0,
@@ -9,85 +19,177 @@
     "SHRP" 0;
 }
 
-.prata-regular {
-  font-family: "Prata", serif;
-  font-weight: 400;
-  font-style: normal;
+@font-face {
+    font-family: 'Lobelia';
+    src: url('fonts/Lobelia') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
 
-body {
-  font-family: sans-serif;
-  text-align: center;
-  padding: 50px;
-  background-image: url("../assets/background.svg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  display: grid;
-  place-items: center;
+@font-face {
+    font-family: 'Gilroy-ExtraBold';
+    src: url('fonts/Gilroy-ExtraBold') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
 
+@font-face {
+    font-family: 'Gilroy-Light';
+    src: url('fonts/Gilroy-Light') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background: linear-gradient(180deg, #090D19 0%, #6265FE 30%, #B6BBFF 90%, #CFE7FF 100%);
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  padding: 20px 0;
+  color: #fff;
+}
+
+/* ---------------------------
+   Рамка телефона / контейнер
+   --------------------------- */
+.phone {
+  width: 360px;
+  height: 720px;
+  border-radius:20px;
+  overflow:hidden;
+  border: 6px solid rgba(0, 0, 0, 0.6);
+  position:relative;
+}
+
+/* ---------------------------
+   Хедер (логотип и звезда)
+   --------------------------- */
 .header {
-  height: 300px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  max-width: 800px;
-  margin-bottom: 20px;
+  position:relative;
+  min-height:120px;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
 }
 
-h1 {
-  font-size: 72px;
+.logo{
+  font-family: "Lobelia", sans-serif;
+  font-size:18px;
+  font-weight:400;
+  letter-spacing:1px;
+  line-height: 1.0;
+  text-transform:uppercase;
+  color: #B6BBFF;
+  width: max-content;
+  position:absolute;
+  left: 30px;
+  top: 40px;
+}
+
+.star {
+  position:absolute;
+  right:40px;
+  top:40px;
+  width:56px;height:56px;
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* ---------------------------
+   Основной заголовок
+   --------------------------- */
+.hero{
+  padding: 20px 40px 10px;
+}
+.date {
+  display:flex;
+  gap:8px;
+  align-items:center;
+  color: #B6BBFF;
+  margin-bottom:8px;
+  font-size:24px;
+}
+
+#title{
+  font-size:48px;
+  line-height: 0.87;
+  max-width:92%;
+  color: #e7edff;
+}
+
+/* ---------------------------
+   Панель / frosted glass
+   --------------------------- */
+.panel {
+  margin:0px;
+  margin-top:8px;
+  border-radius: 60px 60px 0 0;
+  padding: 30px 50px;
+  background: rgba(190, 243, 223, 0.25);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px) saturate(120%);
+  -webkit-backdrop-filter: blur(10px) saturate(120%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 8px 30px rgba(14,16,40,0.35);
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ---------------------------
+   Кнопки — «таблетки»
+   --------------------------- */
+.button{
+  cursor: pointer;
+  display:block;
+  width:100%;
+  padding:20px;
+  border-radius:999px;
+  text-align:center;
+  font-weight:700;
+  font-size:28px;
+  color: #fff;
+  text-decoration:none;
+  background: #6265FE;
+  box-shadow: 0 8px 12px rgba(77,63,190,0.20), inset 0 6px 12px rgba(255,255,255,0.04);
+  transition: transform .15s ease, box-shadow .15s ease;
+  border: none;
+}
+
+.button.game{
+  background: radial-gradient(ellipse at bottom, #B6BBFF 0%, #6265FE 70%);
+}
+
+.button:active{ transform: translateY(2px) scale(.998) }
+.button:hover{ transform: translateY(-4px) }
+
+/* ---------------------------
+   Нижний CTA
+   --------------------------- */
+.cta{
+  text-align:center;
+  margin-top: 8px;
+  margin-bottom: 30px;
+  font-weight:800;
   color: #ffffff;
-  text-align: left;
+  font-size: 24px;
 }
 
-.buttons-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 30px;
-  width: 100%;
-  max-width: 800px;
-}
-
-button {
-    width: 700px;
-    height: 150px;
-    font-size: 54px;
-    color: #ffffff;
-    cursor: pointer;
-    background-color: #222044;
-    border: none;
-    border-radius: 50px;
-    transition: 0.3s;
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#buttonGame {
-  background-image: url("../assets/button_game.svg");
-  background-size: cover;
-  width: 700px;
-  height: 640px;
-  padding-top: 500px;
-  font-size: 54px;
-  color: #222044;
-}
-
-.footer {
-  margin-top: auto;
-  padding: 50px 0;
-  width: 100%;
-  max-width: 800px;
-}
-
-#downWish {
-  font-size: 38px;
-  color: #ffffff;
+/* ---------------------------
+   Адаптация под большие экраны
+   --------------------------- */
+@media(min-width:100px){
+  .phone{ width:420px }
+  .phone{ height: 840px }
+  .title{ font-size:40px }
 }

@@ -1,42 +1,50 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>PolyEsotericBot</title>
-  <link rel="stylesheet" href="./css/style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Poly Esoteric — Demo</title>
+
+  <!-- Подключение внешнего CSS -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Google Font (опционально) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&family=Prata&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&display=swap" rel="stylesheet">
 </head>
+<body class="geologica">
+  <div role="document" aria-label="Пример мобильного интерфейса">
+    <header class="header">
+      <div class="logo">POLY<br>ESOT<br>ERIC</div>
 
-<body>
+      <div class="star" aria-hidden="true">
+        <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M120 60C71.8555 66.5478 66.5478 71.8569 60 120C53.4522 71.8569 48.1431 66.5478 0 60C48.1431 53.4522 53.4522 48.1431 60 3.94649e-06C66.5478 48.1431 71.8555 53.4522 120 60Z" fill="#B6BBFF"/>
+        </svg>
+      </div>
+    </header>
 
-  <div class="header">
-    <h1 class="prata-regular" id='greetingMes'>Тестируем работу с сервером</h1>
+    <main class="content">
+      <section class="hero" aria-label="Заголовок">
+        <div class="date">
+          <svg width="25" height="25" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M120 60C71.8555 66.5478 66.5478 71.8569 60 120C53.4522 71.8569 48.1431 66.5478 0 60C48.1431 53.4522 53.4522 48.1431 60 3.94649e-06C66.5478 48.1431 71.8555 53.4522 120 60Z" fill="#B6BBFF"/>
+          </svg>
+          <p>Октябрь, 20</p>
+      </div>
+        <h1 id="title">Что же ждет нас сегодня?</h1>
+      </section>
+
+      <nav class="panel" role="navigation" aria-label="Меню приложения">
+        <a href="#" id="buttonCard" class="button">Карта дня</a>
+        <a href="#" id="buttonG" class="button">Гороскоп</a>
+        <a href="#" class="button">Тест</a>
+        <a href="#" class="button game">Игра</a>
+        <div class="cta">Испытай свою судьбу!</div>
+      </nav>
+    </main>
   </div>
-
-  <div class="buttons-container">
-    <button id="buttonGame">
-      <p class="geologica-regular">Игра</p>
-    </button>
-
-    <button id="buttonG"> 
-      <p class="geologica-regular">Гороскоп</p>
-    </button>
-
-    <button id="buttonCard"> 
-      <p class="geologica-regular">Карта дня</p>
-    </button>
-
-    <button id="buttonTest"> 
-      <p class="geologica-regular">Тест</p>
-    </button>
-  </div>
-
-  <div class="footer">
-    <p class="prata-regular" id="downWish">Испытай свою судьбу</p>
-  </div>
-
   <script src="./js/script.js"></script>
 </body>
 </html>

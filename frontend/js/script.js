@@ -1,8 +1,8 @@
-const button = document.getElementById('buttonG');
-const response = document.getElementById('greetingMes');
+const button = document.getElementById("buttonG");
+const response = document.getElementById("title");
 
 button.addEventListener('click', async () => {
-  response.textContent = 'Отправляю запрос во вселенную...';
+  response.textContent = 'Посылаю запрос во вселенную...';
 
   try {
     const res = await fetch('/api/test', {

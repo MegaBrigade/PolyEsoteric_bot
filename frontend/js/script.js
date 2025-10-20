@@ -5,14 +5,14 @@ button.addEventListener('click', async () => {
   response.textContent = 'Посылаю запрос во вселенную...';
 
   try {
-    const res = await fetch('https://polyesoteric-bot.onrender.com/api/test', {
+    const res = await fetch('/api/test', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ message: 'Хочу узнать свой гороскоп' })
     });
 
     const data = await res.json();
-    response.textContent = `Звезды говорят: ${data.reply}`;
+    response.textContent = `${data.reply}`;
   } catch (err) {
     console.error(err);
     response.classList.remove('hidden');

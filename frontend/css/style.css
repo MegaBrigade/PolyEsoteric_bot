@@ -6,6 +6,7 @@
   --bg-mid:#6265FE;
   --bg-bottom:#CFE7FF;
   --accent:#B6BBFF;
+  --glass-border: rgba(255,255,255,0.1);
 }
 
 .geologica {
@@ -48,95 +49,109 @@ html,body{height:100%}
 body{
   background: linear-gradient(180deg, #090D19 0%, #6265FE 30%, #B6BBFF 90%, #CFE7FF 100%);
   display:flex;
-  align-items:flex-start;
+  align-items:center;
   justify-content:center;
-  padding: 20px 0;
+  padding: 20px;
   color: #fff;
 }
 
 /* ---------------------------
-   Рамка телефона / контейнер
+   Основной контейнер (растягиваемый)
    --------------------------- */
 .phone {
-  width: 360px;
-  height: 720px;
-  border-radius:20px;
-  overflow:hidden;
-  border: 6px solid rgba(0, 0, 0, 0.6);
-  position:relative;
+  width: 100%;
+  max-width: 1500px; /* Максимальная ширина, но может быть меньше */
+  height: 100%;
+  max-height: 90vh;
+  min-height: 600px;
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
 }
 
 /* ---------------------------
-   Хедер (логотип и звезда)
+   Хедер (логотип и звезда) - растягиваемый
    --------------------------- */
 .header {
-  position:relative;
-  min-height:120px;
-  display:flex;
-  flex-direction:column;
-  gap:6px;
+  position: relative;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 30px 40px 0;
+  width: 100%;
 }
 
 .logo{
   font-family: "Lobelia", sans-serif;
-  font-size:18px;
-  font-weight:400;
-  letter-spacing:1px;
+  font-size: clamp(16px, 4vw, 24px); /* Адаптивный размер шрифта */
+  font-weight: 400;
+  letter-spacing: 1px;
   line-height: 1.0;
-  text-transform:uppercase;
+  text-transform: uppercase;
   color: #B6BBFF;
   width: max-content;
-  position:absolute;
-  left: 30px;
-  top: 40px;
 }
 
 .star {
-  position:absolute;
-  right:40px;
-  top:40px;
-  width:56px;height:56px;
-  display:flex;align-items:center;justify-content:center;
+  position: absolute;
+  right: 40px;
+  top: 40px;
+  width: clamp(40px, 8vw, 80px); /* Адаптивный размер */
+  height: clamp(40px, 8vw, 80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.star svg {
+  width: 100%;
+  height: 100%;
 }
 
 /* ---------------------------
-   Основной заголовок
+   Основной заголовок - растягиваемый
    --------------------------- */
 .hero{
   padding: 20px 40px 10px;
+  width: 100%;
 }
+
 .date {
-  display:flex;
-  gap:8px;
-  align-items:center;
+  display: flex;
+  gap: 12px;
+  align-items: center;
   color: #B6BBFF;
-  margin-bottom:8px;
-  font-size:24px;
+  margin-bottom: 6px;
+  font-size: clamp(24px, 3vw, 32px); /* Адаптивный размер */
+}
+
+.date svg {
+  width: clamp(25px, 4vw, 33px);
+  height: clamp(25px, 4vw, 33px);
 }
 
 #title{
-  font-size:48px;
-  line-height: 0.87;
-  max-width:92%;
+  font-size: clamp(48px, 6vw, 56px); /* Адаптивный размер */
+  line-height: 1.0;
   color: #e7edff;
+  width: 100%;
 }
 
 /* ---------------------------
-   Панель / frosted glass
+   Панель / frosted glass - растягиваемая
    --------------------------- */
 .panel {
-  margin:0px;
-  margin-top:8px;
-  border-radius: 60px 60px 0 0;
-  padding: 30px 50px;
-  background: rgba(190, 243, 223, 0.25);
+  border-radius: 40px 40px 0 0;
+  padding: clamp(30px, 6vw, 25px) clamp(25px, 6vw, 35px); /* Адаптивные отступы */
+  background: rgba(190, 243, 223, 0.15);
   border: 1px solid var(--glass-border);
   backdrop-filter: blur(10px) saturate(120%);
   -webkit-backdrop-filter: blur(10px) saturate(120%);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 8px 30px rgba(14,16,40,0.35);
-  display:flex;
-  flex-direction:column;
-  gap:20px;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 2vw, 16px); /* Адаптивный gap */
 
   position: absolute;
   bottom: 0;
@@ -147,19 +162,19 @@ body{
 }
 
 /* ---------------------------
-   Кнопки — «таблетки»
+   Кнопки — адаптивные
    --------------------------- */
 .button{
   cursor: pointer;
-  display:block;
-  width:100%;
-  padding:20px;
-  border-radius:999px;
-  text-align:center;
-  font-weight:700;
-  font-size:28px;
+  display: block;
+  width: 100%;
+  padding: clamp(16px, 6vw, 20px); /* Адаптивный padding */
+  border-radius: 999px;
+  text-align: center;
+  font-weight: 700;
+  font-size: clamp(28px, 3vw, 18px); /* Адаптивный размер шрифта */
   color: #fff;
-  text-decoration:none;
+  text-decoration: none;
   background: #6265FE;
   box-shadow: 0 8px 12px rgba(77,63,190,0.20), inset 0 6px 12px rgba(255,255,255,0.04);
   transition: transform .15s ease, box-shadow .15s ease;
@@ -171,25 +186,95 @@ body{
 }
 
 .button:active{ transform: translateY(2px) scale(.998) }
-.button:hover{ transform: translateY(-4px) }
+.button:hover{ transform: translateY(-2px) }
 
 /* ---------------------------
-   Нижний CTA
+   Нижний CTA - адаптивный
    --------------------------- */
 .cta{
-  text-align:center;
-  margin-top: 8px;
-  margin-bottom: 30px;
-  font-weight:800;
+  text-align: center;
+  margin-top: 22px;
+  margin-bottom: clamp(25px, 6vw, 35px);
+  font-weight: 600;
   color: #ffffff;
-  font-size: 24px;
+  font-size: clamp(16px, 6vw, 32px);
+  opacity: 0.9;
 }
 
 /* ---------------------------
-   Адаптация под большие экраны
+   Адаптация под разные экраны
    --------------------------- */
-@media(min-width:100px){
-  .phone{ width:420px }
-  .phone{ height: 840px }
-  .title{ font-size:40px }
+
+/* Маленькие экраны (до 480px) */
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+  
+  .phone {
+    border-radius: 30px;
+    max-height: 95vh;
+    min-height: 500px;
+  }
+  
+  .header {
+    padding: 20px 25px 0;
+    min-height: 100px;
+  }
+  
+  .hero {
+    padding: 15px 25px 10px;
+  }
+  
+  .panel {
+    border-radius: 30px 30px 0 0;
+  }
+  
+  .star {
+    right: 25px;
+    top: 25px;
+  }
+}
+
+/* Средние экраны (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .phone {
+    max-width: 90%;
+  }
+}
+
+/* Большие экраны (769px - 1200px) */
+@media (min-width: 769px) and (max-width: 1200px) {
+  .phone {
+    max-width: 600px;
+  }
+}
+
+/* Очень большие экраны (1201px и выше) */
+@media (min-width: 1201px) {
+  .phone {
+    max-width: 700px;
+    max-height: 850px;
+  }
+}
+
+/* Ландшафтная ориентация */
+@media (max-height: 600px) and (orientation: landscape) {
+  .phone {
+    max-height: 95vh;
+    min-height: 400px;
+  }
+  
+  .header {
+    min-height: 80px;
+    padding: 15px 30px 0;
+  }
+  
+  .hero {
+    padding: 10px 30px 5px;
+  }
+  
+  #title {
+    margin-bottom: 10px;
+  }
 }

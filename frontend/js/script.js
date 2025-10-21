@@ -1,6 +1,18 @@
 const button = document.getElementById("buttonG");
 const response = document.getElementById("title");
-
+function updateDate() {
+  const dateElement = document.querySelector('.date p');
+  const now = new Date();
+  const months = [
+    'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
+    'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
+  ];
+  
+  const month = months[now.getMonth()];
+  const day = now.getDate();
+  dateElement.textContent = `${month}, ${day}`;
+}
+document.addEventListener('DOMContentLoaded', updateDate);
 button.addEventListener('click', async () => {
   response.textContent = 'Посылаю запрос во вселенную...';
 

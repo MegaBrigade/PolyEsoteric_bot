@@ -70,7 +70,7 @@ body{
   display:flex;
   flex-direction:column;
   gap:6px;
-  padding:70px 40px 0;
+  padding:40px 40px 0;
   width:100%;
   flex-shrink:0;
 }
@@ -89,7 +89,6 @@ body{
 .star {
   position:absolute;
   right:40px;
-  top:70px;
   width:clamp(50px,10vw,70px);
   height:clamp(50px,10vw,70px);
   display:flex;
@@ -112,7 +111,7 @@ body{
   gap:8px;
   align-items:center;
   color:#B6BBFF;
-  margin-bottom:6px;
+  margin-bottom:5ыыpx;
   font-size:clamp(24px,4vw,32px);
 }
 
@@ -129,8 +128,8 @@ body{
 }
 
 .panel {
-  border-radius:30px 30px 0 0;
-  padding: clamp(20px, 5vw, 30px);
+  border-radius:50px 50px 0 0;
+  padding: clamp(30px, 5vw, 20px);
   background:rgba(190,243,223,0.15);
   border:1px solid var(--glass-border);
   backdrop-filter:blur(10px) saturate(120%);
@@ -177,4 +176,3 @@ body{
   font-size:clamp(18px,4vw,32px);
   opacity:.9;
 }
-

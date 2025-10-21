@@ -28,6 +28,6 @@ button.addEventListener('click', async () => {
   } catch (err) {
     console.error(err);
     response.classList.remove('hidden');
-    response.textContent = 'Хрустальный шар говорит, что будущее туманно';
+    response.textContent = 'Твое будущее туманно...';
   }
 });

@@ -70,7 +70,7 @@ body{
   display:flex;
   flex-direction:column;
   gap:6px;
-  padding:40px 40px 0;
+  padding: clamp(20px,4vw,40px) 40px 0;
   width:100%;
   flex-shrink:0;
 }
@@ -147,7 +147,7 @@ body{
   cursor:pointer;
   display:block;
   width:100%;
-  padding: clamp(20px,4vw,24px);;
+  padding: clamp(20px,4vw,24px);
   border-radius:999px;
   text-align:center;
   font-weight:700;

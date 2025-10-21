@@ -121,7 +121,7 @@ body{
 }
 
 #title{
-  font-size:clamp(42px,6vw,72px);
+  font-size:clamp(35px,6vw,72px);
   line-height:1.0;
   color:#e7edff;
   width:100%;

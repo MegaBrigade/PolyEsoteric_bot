@@ -44,15 +44,65 @@ function goBack() {
 }
 
 // Обработчик формы
+// document.addEventListener('DOMContentLoaded', function() {
+//     const form = document.getElementById('birthdayForm');
+//     const loader = document.getElementById('loader');
+//     const content = document.querySelector('.content');
+
+//     form.addEventListener('submit', function(e) {
+//         e.preventDefault();
+        
+//         const birthdateInput = document.getElementById('birthdateInput');
+//         if (!birthdateInput.value) {
+//             alert('Пожалуйста, введите дату рождения');
+//             return;
+//         }
+
+//         // Показываем загрузку
+//         content.style.display = 'none';
+//         loader.style.display = 'flex';
+
+//         // Имитируем загрузку (в реальном приложении здесь может быть запрос к API)
+//         setTimeout(() => {
+//             const birthDate = new Date(birthdateInput.value);
+//             const day = birthDate.getDate();
+//             const month = birthDate.getMonth() + 1;
+            
+//             const zodiacSign = getZodiacSign(day, month);
+            
+//             // Скрываем загрузку и показываем результат
+//             loader.style.display = 'none';
+//             showResult(zodiacSign);
+//         }, 2000);
+//     });
+
+//     // Установка максимальной датой сегодняшний день
+//     const today = new Date().toISOString().split('T')[0];
+//     document.getElementById('birthdateInput').max = today;
+    
+//     console.log('Страница гороскопа загружена');
+// });
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('birthdayForm');
     const loader = document.getElementById('loader');
     const content = document.querySelector('.content');
+    const birthdateInput = document.getElementById('birthdateInput');
 
+    // Обработчик отправки формы
     form.addEventListener('submit', function(e) {
         e.preventDefault();
-        
-        const birthdateInput = document.getElementById('birthdateInput');
+        processForm();
+    });
+
+    // Обработчик нажатия клавиши Enter в поле ввода
+    birthdateInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            processForm();
+        }
+    });
+
+    function processForm() {
         if (!birthdateInput.value) {
             alert('Пожалуйста, введите дату рождения');
             return;
@@ -62,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
         content.style.display = 'none';
         loader.style.display = 'flex';
 
-        // Имитируем загрузку (в реальном приложении здесь может быть запрос к API)
+        // Имитируем загрузку
         setTimeout(() => {
             const birthDate = new Date(birthdateInput.value);
             const day = birthDate.getDate();
@@ -74,15 +124,14 @@ document.addEventListener('DOMContentLoaded', function() {
             loader.style.display = 'none';
             showResult(zodiacSign);
         }, 2000);
-    });
+    }
 
     // Установка максимальной датой сегодняшний день
     const today = new Date().toISOString().split('T')[0];
-    document.getElementById('birthdateInput').max = today;
+    birthdateInput.max = today;
     
     console.log('Страница гороскопа загружена');
 });
-
 // Тестовые данные Telegram (оставьте без изменений)
 if (!window.Telegram) {
     console.log('🔧 Загружаем тестовые данные Telegram...');

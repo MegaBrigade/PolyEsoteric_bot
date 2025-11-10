@@ -1,5 +1,6 @@
 const button = document.getElementById("buttonG");
 const response = document.getElementById("title");
+const tarotButton = document.getElementById("buttonCard");
 
 // === ТЕСТОВЫЕ ДАННЫЕ ===
 if (!window.Telegram) {
@@ -143,4 +144,8 @@ button.addEventListener('click', async () => {
         console.error(err);
         response.textContent = 'Твое будущее туманно...';
     }
+});
+
+tarotButton.addEventListener('click', async () => {
+    window.location.href = 'tarot.html';
 });

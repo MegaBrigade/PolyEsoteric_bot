@@ -1,0 +1,394 @@
+:root {
+  --bg-top:#B6BBFF;
+  --bg-mid:#E9F4FF;
+  --bg-bottom:#CFE7FF;
+  --accent:#C7EDEF;
+  --glass-border: rgba(255,255,255,0.1);
+}
+
+.geologica {
+  font-family: "Geologica", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  font-variation-settings:
+    "slnt" 0,
+    "CRSV" 0,
+    "SHRP" 0;
+}
+
+@font-face {
+  font-family: 'Lobelia';
+  src: url('../fonts/Lobelia.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gilroy-ExtraBold';
+  src: url('../fonts/Gilroy-ExtraBold.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gilroy-Light';
+  src: url('../fonts/Gilroy-Light.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;width:100%}
+body{
+  background: linear-gradient(180deg,#B6BBFF 0%,#E9F4FF 66%, #C7EDEF 87%, #BEF3DF 98%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  color:#fff;
+  overflow-x:hidden;
+}
+
+.phone {
+  width:100%;
+  height:100%;
+  position:relative;
+  overflow:hidden;
+  margin:0 auto;
+  border-radius:30px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+
+.header {
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  padding: clamp(20px,4vw,40px) clamp(10px,6vw,40px) 0;
+  width:100%;
+  flex-shrink:0;
+}
+
+.logo{
+  font-family:"Lobelia",sans-serif;
+  font-size: 18px;
+  font-weight:400;
+  letter-spacing:1px;
+  line-height:1;
+  text-transform:uppercase;
+  color:#6265FE;
+  width:max-content;
+}
+
+
+.hero{
+  padding:10px clamp(20px,4vw,40px) clamp(10px,4vw,30px);
+  width:100%;
+  flex-shrink:0;
+}
+
+#title{
+  font-size:clamp(35px,6vw,72px);
+  line-height:1.0;
+  color:#6265FE;
+  width:100%;
+}
+
+.panel {
+  border-radius: clamp(35px,4vw,50px) clamp(35px,4vw,50px) 0 0;
+  padding: clamp(30px, 5vw, 20px);
+  background: rgba(190,243,223,0.15);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px) saturate(120%);
+  -webkit-backdrop-filter: blur(10px) saturate(120%);
+  box-shadow: 
+    inset 0 1px 0 rgba(255,255,255,0.04),
+    0 4px 20px rgba(14,16,40,0.15); /* Уменьшил непрозрачность с 0.35 до 0.15 */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+
+
+.cta{
+  text-align:center;
+  margin-top:16px;
+  margin-bottom:clamp(20px,4vw,30px);
+  font-weight:600;
+  color:#fff;
+  font-size:clamp(18px,4vw,32px);
+  opacity:.9;
+}
+.image {
+  width: 80%;
+  max-width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 120px auto 60px;
+}
+
+@media (min-width: 768px) {
+  .image {
+    margin: 80px auto 40px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .image {
+    margin: 10px auto 20px;
+    max-width: 450px;
+  }
+}
+
+.image svg {
+  width: 100%;
+  height: auto;
+}
+.image1 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  max-width: 130px;
+  height: auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 2;
+}
+
+.image1 svg {
+  width: 100%;
+  height: auto;
+  min-height: 100px; /* Минимальная высота если нужно */
+}
+.image2 {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  max-width: 130px;
+  height: auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 2;
+}
+
+.image2 svg {
+  width: 100%;
+  height: auto;
+  min-height: 100px; /* Минимальная высота если нужно */
+}
+.arrow {
+  position:absolute;
+  right:clamp(20px,4vw,40px);
+  width:clamp(50px,10vw,70px);
+  height:clamp(50px,10vw,70px);
+  width: 125;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:0;
+  opacity:1;
+}
+
+.arrow svg {width:100%;height:100%;}
+/* Добавьте эти стили в конец файла */
+
+.main-title {
+  position: absolute;
+  top: 22%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  padding: 0 clamp(20px, 4vw, 40px);
+  text-align: center;
+  z-index: 5;
+}
+
+#title {
+  font-size: clamp(35px, 6vw, 72px);
+  line-height: 1.0;
+  color: #6265FE;
+  width: 100%;
+  text-align: center;
+}
+
+/* Обновите существующие стили для .hero (если они больше не нужны) */
+.hero {
+  display: none; /* Скрываем старый блок, если он больше не используется */
+}
+
+/* Обновите отступы для header чтобы освободить место */
+.header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: clamp(20px, 4vw, 40px) clamp(10px, 6vw, 40px) 0;
+  width: 100%;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+/* Если нужно, чтобы панель была ниже, можно добавить отступ снизу */
+.phone {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Стили для системы экранов */
+.screen {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.screen.active {
+  display: flex;
+}
+
+/* Стили для экрана вопроса */
+.question-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Распределяем пространство */
+  padding: 0 clamp(20px, 4vw, 40px);
+  text-align: center;
+}
+
+.question-number {
+  font-family: "Lobelia", sans-serif;
+  font-size: clamp(60px, 5vw, 90px);
+  color: transparent;
+  -webkit-text-stroke: 1px #6265FE;
+  stroke: #5154d6;
+  margin-top: 30px; /* Добавляем отступ сверху */
+  opacity: 0.8;
+  letter-spacing: 1px;
+}
+
+.question-text {
+  font-family: "Gilroy";
+  font-size: clamp(40px, 5vw, 80px);
+  color: #6265FE;
+  line-height: 1.2;
+  margin-bottom: 20px; /* Уменьшаем отступ */
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.option {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 20px;
+  font-size: clamp(18px, 4vw, 24px);
+  color: #6265FE;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.option:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.navigation {
+  padding: 10px clamp(20px, 4vw, 40px) 20px; /* Уменьшаем верхний отступ */
+  text-align: center;
+}
+
+.button {
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  padding: clamp(20px, 4vw, 24px);
+  border-radius: 999px;
+  text-align: center;
+  font-weight: 700;
+  font-size: clamp(24px, 4vw, 34px);
+  color: #CFE7FF;
+  text-decoration: none;
+  background: #6265FE;
+  box-shadow: 0 8px 12px rgba(77, 63, 190, 0.2), inset 0 6px 12px rgba(255, 255, 255, 0.04);
+  transition: transform .15s ease, box-shadow .15s ease;
+  border: none;
+  margin-top: 10px; /* Добавляем небольшой отступ сверху */
+}
+
+
+.next-btn {
+  background: #6265FE;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 15px 40px;
+  font-size: clamp(18px, 4vw, 20px);
+  cursor: pointer;
+  width: 100%;
+  max-width: 200px;
+  transition: all 0.3s ease;
+}
+
+.next-btn:hover {
+  background: #5255e0;
+  transform: translateY(-2px);
+}
+
+.progress-bar {
+  width: 100px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  margin-top: 10px;
+}
+
+.progress-fill {
+  width: 20%; /* 1 из 5 вопросов */
+  height: 100%;
+  background: #6265FE;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+/* Анимация перехода между экранами */
+.screen {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

@@ -1,7 +1,7 @@
 const button = document.getElementById("buttonG");
 const response = document.getElementById("title");
 const tarotButton = document.getElementById("buttonCard");
-
+const magesButton = document.getElementById("buttonT");
 // === ТЕСТОВЫЕ ДАННЫЕ ===
 if (!window.Telegram) {
     console.log('🔧 Загружаем тестовые данные Telegram...');
@@ -148,4 +148,8 @@ button.addEventListener('click', async () => {
 
 tarotButton.addEventListener('click', async () => {
     window.location.href = 'tarot.html';
+});
+
+magesButton.addEventListener('click', async () => {
+    window.location.href = 'mages.html';
 });

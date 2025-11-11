@@ -15,36 +15,47 @@
 </head>
 <body class="geologica">
     <div class="phone" role="document" aria-label="Пример мобильного интерфейса">
-    <header class="header">
-      <div class="logo">POLY<br>ESOT<br>ERIC</div>
+    <div class="screen">
 
-      <button id="return" class="arrow" aria-hidden="true">
-        <svg width="125" height="80" viewBox="0 0 125 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M125 40L65.4762 80V46.9283L5.95238 46.9283C2.66497 46.9283 0 43.8264 0 40C0 36.1736 2.66497 33.0717 5.95238 33.0717L65.4762 33.0717L65.4762 0L125 40Z" fill="#CFE7FF"/>
-        </svg>
-      </button>
-    </header>
+      <header class="header">
+        <div class="logo">POLY<br>ESOT<br>ERIC</div>
 
-    <h1 id=title>Нажми, чтобы<br>открыть карту!</h1>
-
-      <div class="cards">
-        <div class="card card-bg">
-          <svg class="light-card-svg-right" viewBox="37 130 446 800" preserveAspectRatio="xMidYMid meet">
-            <image href="assets/light_card.svg" width="100%" height="100%" />
-          </svg>
-        </div>
-        <div class="card card-bg rotated">
-          <svg class="light-card-svg-left" viewBox="37 130 446 800" preserveAspectRatio="xMidYMid meet">
-            <image href="assets/light_card.svg" width="100%" height="100%" />
-          </svg>
-        </div>
-        <button class="card main-card">
-          <svg class="card-svg" viewBox="33 58 446 800" preserveAspectRatio="xMidYMid meet">
-            <image href="assets/card.svg" width="115%" height="115%" />
+        <button id="return" class="arrow" aria-hidden="true">
+          <svg width="125" height="80" viewBox="0 0 125 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M125 40L65.4762 80V46.9283L5.95238 46.9283C2.66497 46.9283 0 43.8264 0 40C0 36.1736 2.66497 33.0717 5.95238 33.0717L65.4762 33.0717L65.4762 0L125 40Z" fill="#CFE7FF"/>
           </svg>
         </button>
+      </header>
+
+      <h1 id=title>Нажми, чтобы<br>открыть карту!</h1>
+
+        <div class="cards">
+          <div class="card card-bg">
+            <svg class="light-card-svg-right" viewBox="37 130 446 800" preserveAspectRatio="xMidYMid meet">
+              <image href="assets/light_card.svg" width="100%" height="100%" />
+            </svg>
+          </div>
+          <div class="card card-bg rotated">
+            <svg class="light-card-svg-left" viewBox="37 130 446 800" preserveAspectRatio="xMidYMid meet">
+              <image href="assets/light_card.svg" width="100%" height="100%" />
+            </svg>
+          </div>
+          <button class="card main-card">
+            <svg class="card-svg" viewBox="33 58 446 800" preserveAspectRatio="xMidYMid meet">
+              <image href="assets/card.svg" width="115%" height="115%" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="result-screen hidden">
+          <h2 id="cardName"></h2>
+          <img id="cardImage" src="" alt="Card of the Day" />
+          <p id="cardDescription"></p>
+          <button id="backButton">Вернуться</button>
+        </div>
+
       </div>
-  </div>
+    </div>
   <script src="./js/tarot.js"></script>
 </body>
 </html>

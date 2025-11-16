@@ -104,6 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const loader = document.getElementById('loader');
     const content = document.querySelector('.content');
     const birthdateInput = document.getElementById('birthdateInput');
+    const returnButton = document.getElementById("return");
     initializeTelegram();
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -115,7 +116,10 @@ document.addEventListener('DOMContentLoaded', function() {
             await processForm();
         }
     });
-
+    returnButton.addEventListener("click", (e) => {
+        e.stopPropagation();
+        window.location.href = "index.html";
+    });
     async function processForm() {
         if (!birthdateInput.value) {
             alert('Пожалуйста, введите дату рождения');

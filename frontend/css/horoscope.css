@@ -82,7 +82,7 @@ body{
   letter-spacing:1px;
   line-height:1;
   text-transform:uppercase;
-  color:#B6BBFF;
+  color:#CFE7FF;
   width:max-content;
 }
 
@@ -105,43 +105,20 @@ body{
   height: 100%;
 }
 .arrow {
-  position:absolute;
-  /* left:clamp(400px,4vw,530px);
-  width:clamp(50px,10vw,125px);
-  height:clamp(-200px,10vw,80px); */
-  right:clamp(20px,4vw,40px);
-  width:clamp(50px,10vw,70px);
-  height:clamp(50px,10vw,70px);
-  width: 125;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:0;
-  opacity:1;
-}
-
-.arrow svg {width:100%;height:100%;}
-
-/* .hero{
-  padding:10px clamp(20px,4vw,40px) clamp(10px,4vw,30px);
-  width:100%;
-  flex-shrink:0;
+  background: none;
+  border: none;
+  position: absolute;
+  color: #CFE7FF;
+  right: clamp(20px,4vw,40px);
+  width: clamp(50px,10vw,70px);
+  height: clamp(50px,10vw,70px);
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex-grow: 1;
-  text-align: center;
+  z-index: 0;
+  opacity: 1;
+  cursor: pointer;
 }
-
-#title{
-  font-size:clamp(60px,6vw,72px);
-  line-height:1.0;
-  color:#e7edff;
-  width:100%;
-  margin-bottom: 40px;
-} */
 .img {
   width: 80%;
   min-width: 450px;
@@ -149,28 +126,24 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 80px auto 100px; /* Уменьшил верхний и нижний отступы */
+  margin: 80px auto 100px;
 }
 
-/* Для планшетов */
 @media (min-width: 768px) {
   .img {
-    margin: 60px auto 30px; /* Уменьшил отступы */
+    margin: 60px auto 30px;
   }
 }
-
-/* Для десктопов */
 @media (min-width: 1024px) {
   .img {
-    margin: 20px auto 40px; /* Уменьшил отступы */
+    margin: 20px auto 40px;
 
   }
 }
 
-/* Для очень больших экранов */
 @media (min-width: 1440px) {
   .img {
-    margin: 5px auto 15px; /* Уменьшил отступы */
+    margin: 5px auto 15px;
 
   }
 }
@@ -187,20 +160,20 @@ body{
   flex-shrink:0;
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Изменено с center на flex-start */
+  align-items: flex-start;
   justify-content: center;
   flex-grow: 1;
-  text-align: left; /* Добавлено выравнивание по левому краю */
+  text-align: left;
 }
 
 #title{
   font-size:clamp(60px,6vw,72px);
-  line-height:0.55; /* Уменьшено с 1.0 для меньшего межстрочного интервала */
+  line-height:0.55;
   color:#e7edff;
   width:100%;
-  margin-bottom: 20px; /* Уменьшено с 40px */
-  text-align: left; /* Явное выравнивание по левому краю */
-  word-spacing: -2px; /* Дополнительно уменьшает пробелы между словами */
+  margin-bottom: 20px;
+  text-align: left;
+  word-spacing: -2px;
 }
 .button-container {
   width: 100%;
@@ -243,7 +216,6 @@ body{
   font-size:clamp(18px,4vw,32px);
   opacity:.9;
 }
-/* Добавьте эти стили в конец файла */
 
 .birthday-form {
   width: 100%;
@@ -278,20 +250,6 @@ body{
   cursor: pointer;
   padding: 5px;
 }
-
-/* .submit-btn {
-  background: rgba(255, 255, 255, 0.1);
-  border: 4px solid #ffffff;
-  font-size: clamp(18px, 3vw, 24px);
-  cursor: pointer;
-}
-
-.submit-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-} */
-
-/* Стили для загрузочного экрана */
-/* Обновленные стили для загрузочного экрана */
 .loader {
   position: absolute;
   top: 0;
@@ -310,7 +268,7 @@ body{
   align-items: center;
   justify-content: center;
   flex-grow: 1;
-  padding: 0 20px 80px; /* Отступ снизу для текста */
+  padding: 0 20px 80px;
 }
 
 .loader-text-container {
@@ -341,28 +299,24 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 120px auto 60px; /* Значения по умолчанию для мобильных */
+  margin: 120px auto 60px;
 }
 
-/* Для планшетов */
 @media (min-width: 768px) {
   .img2 {
-    margin: 80px auto 40px; /* Уменьшаем отступы для планшетов */
+    margin: 80px auto 40px;
   }
 }
 
-/* Для десктопов */
 @media (min-width: 1024px) {
   .img2 {
-    margin: 30px auto 50px; /* Еще меньше отступы для десктопов */
-    max-width: 350px; /* Можно также уменьшить максимальную ширину */
+    margin: 30px auto 50px;
+    max-width: 350px;
   }
 }
-
-/* Для очень больших экранов */
 @media (min-width: 1440px) {
   .img2 {
-    margin: 10px auto 20px; /* Минимальные отступы для больших экранов */
+    margin: 10px auto 20px;
     max-width: 450px;
   }
 }
@@ -376,47 +330,149 @@ body{
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-/* Стили для экрана результата */
-.result-screen {
-  position: fixed;
-  top: 0;
-  left: 0;
+
+.submit-btn {
   width: 100%;
-  height: 100%;
-  background: linear-gradient(180deg, #090D19 17%, #6265FE 96%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  padding: 20px;
+  padding: clamp(20px, 4vw, 24px);
+  border-radius: 999px;
+  text-align: center;
+  font-weight: 700;
+  font-size: clamp(18px, 3vw, 24px);
+  color: #fff;
+  background: transparent;
+  border: 4px solid #ffffff;
+  font-family: "Geologica", sans-serif;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin-top: 20px;
+}
+
+.submit-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.submit-btn:active {
+  transform: translateY(2px) scale(.998);
+}
+.result-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    z-index: 1000;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .result-content {
-  text-align: center;
-  color: white;
-  max-width: 500px;
-  width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 400px;
+    width: 100%;
+    color: white;
+    text-align: center;
+}
+
+.zodiac-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    gap: 15px;
+}
+
+.zodiac-icon {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
 }
 
 .zodiac-title {
-  font-size: clamp(32px, 6vw, 48px);
-  margin-bottom: 20px;
-  color: #e7edff;
+    font-size: 24px;
+    margin: 0;
+    color: white;
+    flex-grow: 1;
+    text-align: center;
 }
 
 .zodiac-description {
-  font-size: clamp(16px, 3vw, 20px);
-  line-height: 1.5;
-  margin-bottom: 30px;
-  opacity: 0.9;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 25px;
+    color: white;
+}
+
+.zodiac-features {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+}
+
+.feature {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    color: white;
+    font-size: 14px;
+}
+
+.feature:last-child {
+    margin-bottom: 0;
+}
+
+.feature-label {
+    font-weight: bold;
+}
+
+.feature-value {
+    opacity: 0.9;
+}
+
+.result-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.result-btn, .share-btn {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .result-btn {
-  width: auto;
-  padding: 15px 30px;
-  background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
 }
 
-.result-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
+.share-btn {
+    background: #CFE7FF;
+    color: #333;
+}
+
+.result-btn:hover, .share-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.result-title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #e7edff;
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: bold;
 }

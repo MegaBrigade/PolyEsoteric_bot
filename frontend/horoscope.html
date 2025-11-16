@@ -41,11 +41,9 @@
     <div class="button-container">
       <form id="birthdayForm" class="birthday-form">
         <input type="date" id="birthdateInput" class="date-input" required>
+        <button type="submit" class="button submit-btn">Узнай свою судьбу</button>
       </form>
     </div>    
-      <!-- <div class="button-container">
-        <a href="#" id="buttonCard" class="button"></a>
-      </div> -->
     </main>
     <div class="img" aria-hidden="true">
         <svg width="713" height="622" viewBox="0 0 713 622" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -89,13 +87,12 @@
       </div>  
 
     </div>
-
-    
-
-    <!-- Экран результата -->
     <div id="result" class="result-screen" style="display: none;">
       <div class="result-content">
-        <h2 id="zodiacSign" class="zodiac-title"></h2>
+        <h2 class="result-title" style="text-align: center; margin-bottom: 20px; color: #e7edff; font-size: clamp(24px, 4vw, 32px);">
+          Вывод результата
+        </h2>
+        <h3 id="zodiacSign" class="zodiac-title"></h3>
         <p id="zodiacDescription" class="zodiac-description"></p>
         <div class="result-actions">
           <button class="button result-btn" onclick="goBack()">Назад</button>
@@ -103,12 +100,6 @@
       </div>
     </div>
   </div>
-      
-    </header>
-
-
-  </div>
-
   <script src="./js/horoscope.js"></script>
 </body>
 </html>

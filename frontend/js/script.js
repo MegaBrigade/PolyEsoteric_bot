@@ -151,5 +151,5 @@ tarotButton.addEventListener('click', async () => {
 });
 
 magesButton.addEventListener('click', async () => {
-    window.location.href = 'mages.html';
+    window.location.href = 'test.html';
 });

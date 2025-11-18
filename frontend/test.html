@@ -50,28 +50,74 @@
       <header class="header">
         <div class="logo">POLY<br>ESOT<br>ERIC</div>
         <button id="returnQuestion" class="arrow" aria-hidden="true">
-            <svg width="125" height="80" viewBox="0 0 125 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M125 40L65.4762 80V46.9283L5.95238 46.9283C2.66497 46.9283 0 43.8264 0 40C0 36.1736 2.66497 33.0717 5.95238 33.0717L65.4762 33.0717L65.4762 0L125 40Z" fill="#6265FE"/>
-            </svg>
+          <svg width="125" height="80" viewBox="0 0 125 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M125 40L65.4762 80V46.9283L5.95238 46.9283C2.66497 46.9283 0 43.8264 0 40C0 36.1736 2.66497 33.0717 5.95238 33.0717L65.4762 33.0717L65.4762 0L125 40Z" fill="#6265FE"/>
+          </svg>
         </button>
       </header>
 
       <section class="question-content">
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+        
         <div class="question-number">Вопрос 1</div>
         <h2 class="question-text">Какой твой любимый сок?</h2>
-        <nav class="panel" role="navigation" aria-label="Меню приложения">
-            <a href="#" id="buttonQ1" class="button">Вишневый</a>
-            <a href="#" id="buttonQ2" class="button">Ананасовый</a>
-            <a href="#" id="buttonQ3"class="button">Мультифрукт</a>
-            <a href="#" id="buttonQ4"class="button">Не пью</a>
-        </nav>       
+        
+        <div class="scroll-container">
+          <nav class="panel" role="navigation" aria-label="Варианты ответов">
+            <a href="#" class="button">Вишневый</a>
+            <a href="#" class="button">Ананасовый</a>
+            <a href="#" class="button">Мультифрукт</a>
+            <a href="#" class="button">Не пью</a>
+          </nav>
+        </div>
       </section>
     </div>
+    <div id="result-screen-1" class="screen result-screen">
+      <header class="header">
+        <div class="logo">POLY<br>ESOT<br>ERIC</div>
+        <button id="returnResult1" class="arrow" aria-hidden="true">
+          <svg width="125" height="80" viewBox="0 0 125 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M125 40L65.4762 80V46.9283L5.95238 46.9283C2.66497 46.9283 0 43.8264 0 40C0 36.1736 2.66497 33.0717 5.95238 33.0717L65.4762 33.0717L65.4762 0L125 40Z" fill="#6265FE"/>
+          </svg>
+        </button>
+      </header>
 
+      <section class="result-content">
+        <div class="result-title-outline">СВЕТЛЫЙ МАГ</div>
+        
+        <nav class="result-panel" role="navigation" aria-label="Результат теста">
+          <div class="result-description">
+            <p>Поздравляем, ты обладатель светлой энергии! Ты освещаешь все темные коридоры Политеха, а твое обаяние разгоняет тучи над 3 корпусом. Улыбайся, радуйся и люби</p>
+          </div>
+          <a href="#" class="button retry-btn">Пройти еще раз</a>
+        </nav>
+      </section>
+    </div>
+    <div id="result-screen-2" class="screen result-screen dark-mage-result">
+      <header class="header">
+        <div class="logo">POLY<br>ESOT<br>ERIC</div>
+        <button id="returnResult2" class="arrow" aria-hidden="true">
+          <svg width="125" height="80" viewBox="0 0 125 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M125 40L65.4762 80V46.9283L5.95238 46.9283C2.66497 46.9283 0 43.8264 0 40C0 36.1736 2.66497 33.0717 5.95238 33.0717L65.4762 33.0717L65.4762 0L125 40Z" fill="#6265FE"/>
+          </svg>
+        </button>
+      </header>
+
+      <section class="result-content">
+        <div class="result-title-outline">ТЕМНЫЙ МАГ</div>
+        
+        <nav class="result-panel" role="navigation" aria-label="Результат теста">
+          <div class="result-description">
+            <p>Поздравляем, ты обладатель темной энергии! Твоя скрытность позволяет незматено списывать контрольные, а тёмная аура отпугивает неуды на экзаменах. Кто знает, как это повлияет на тебя в будущем...</p>
+          </div>
+          <a href="#" class="button retry-btn">Пройти еще раз</a>
+        </nav>
+      </section>
+    </div>
   </div>
 
-
-  
   <script src="./js/test.js"></script>
 </body>
 </html>

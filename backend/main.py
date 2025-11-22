@@ -6,7 +6,7 @@ app = FastAPI(title="PolyEsoteric Backend")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://poly-esoteric-bot.vercel.app"],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

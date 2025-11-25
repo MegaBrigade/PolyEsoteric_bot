@@ -11,8 +11,8 @@ class CardResponse(BaseModel):
     name: str
     meaning: str
 
-@router.post("/card", response_model=CardResponse)
-async def get_random_card(data: CardRequest):
+@router.get("/card", response_model=CardResponse)
+async def get_random_card(user_id: int = 1):
     url = "https://tarotapi.dev/api/v1/random"
 
     try:

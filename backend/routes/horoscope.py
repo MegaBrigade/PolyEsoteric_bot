@@ -11,8 +11,13 @@ class ButtonRequest(BaseModel):
 class ButtonResponse(BaseModel):
     content: str
 
-@router.get("/horoscope", response_model=ButtonResponse)
-async def get_horoscope(data: ButtonRequest):
+from fastapi import APIRouter
+import requests
+
+router = APIRouter()
+
+@router.get("/horoscope", response_model=dict)
+async def get_horoscope():
 
     zodiac_name = "aries"
     url = f"https://horoscope-app-api.vercel.app/api/v1/get-horoscope/daily?sign={zodiac_name}&day=TODAY"
@@ -27,3 +32,4 @@ async def get_horoscope(data: ButtonRequest):
         content = f"Ошибка при получении гороскопа: {str(e)}"
 
     return {"content": content}
+

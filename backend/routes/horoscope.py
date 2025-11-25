@@ -11,10 +11,11 @@ class ButtonRequest(BaseModel):
 class ButtonResponse(BaseModel):
     content: str
 
-@router.post("/horoscope", response_model=ButtonResponse)
+@router.get("/horoscope", response_model=ButtonResponse)
 async def get_horoscope(data: ButtonRequest):
-    zodiac_name = data.input.lower()
-    url = f"https://horoscope-app-api.vercel.app/daily?sign={zodiac_name}"
+
+    zodiac_name = "aries"
+    url = f"https://horoscope-app-api.vercel.app/api/v1/get-horoscope/daily?sign={zodiac_name}&day=TODAY"
 
     try:
         response = requests.get(url)

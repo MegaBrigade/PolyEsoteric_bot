@@ -1,5 +1,6 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
+from translate import Translator
 import requests
 
 router = APIRouter()
@@ -27,7 +28,9 @@ async def get_horoscope():
         horoscope_data = response.json()
 
         horoscope_text = horoscope_data["data"].get("horoscope_data", "Гороскоп пока недоступен")
-        content = f"Ваш гороскоп на сегодня ({horoscope_data['data']['date']}):\n{horoscope_text}"
+        translator = Translator(to_lang="ru")
+        translated_text = translator.translate(horoscope_text)
+        content = f"Ваш гороскоп на сегодня:\n {translated_text}"
     except requests.exceptions.HTTPError as http_err:
         content = f"Ошибка HTTP: {http_err}"
     except requests.exceptions.RequestException as req_err:

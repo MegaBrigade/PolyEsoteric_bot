@@ -9,11 +9,13 @@ class TarotResponse(BaseModel):
     description: str
     image_url: str
 
-@router.post("/card", response_model=TarotResponse)
+@router.get("/card", response_model=TarotResponse)
 async def get_random_tarot():
     url = "https://tarot-api.dev/api/v1/random"
+
     try:
         response = requests.get(url)
+
         response.raise_for_status()
 
         card_data = response.json()

@@ -30,7 +30,7 @@ async def get_horoscope():
         horoscope_text = horoscope_data["data"].get("horoscope_data", "Гороскоп пока недоступен")
         translator = Translator(to_lang="ru")
         translated_text = translator.translate(horoscope_text)
-        content = f"Ваш гороскоп на сегодня:\n {translated_text}"
+        content = translated_text
     except requests.exceptions.HTTPError as http_err:
         content = f"Ошибка HTTP: {http_err}"
     except requests.exceptions.RequestException as req_err:

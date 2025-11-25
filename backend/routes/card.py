@@ -1,28 +1,29 @@
-from fastapi import APIRouter
+from fastapi import FastAPI
 from pydantic import BaseModel
 import requests
+from fastapi.responses import JSONResponse
 
-router = APIRouter()
+app = FastAPI(title="PolyEsoteric Tarot Backend")
 
-class CardRequest(BaseModel):
-    user_id: int
-
-class CardResponse(BaseModel):
+class TarotResponse(BaseModel):
     name: str
-    meaning: str
+    description: str
+    image_url: str
 
-@router.get("/card", response_model=CardResponse)
-async def get_random_card(user_id: int = 1):
-    url = "https://tarotapi.dev/api/v1/random"
-
+@app.post("/api/tarot", response_model=TarotResponse)
+async def get_random_tarot():
+    url = "https://tarot-api.dev/api/v1/random"
     try:
         response = requests.get(url)
         response.raise_for_status()
-        card_data = response.json()
-        name = card_data.get("name", "Неизвестная карта")
-        meaning = card_data.get("meaning_up", "Описание недоступно")
-    except Exception as e:
-        name = "Ошибка"
-        meaning = f"Не удалось получить карту: {str(e)}"
 
-    return {"name": name, "meaning": meaning}
+        card_data = response.json()
+
+        name = card_data.get("name", "Неизвестная карта")
+        description = card_data.get("description", "Описание недоступно")
+        image_url = card_data.get("image", "")
+
+        return TarotResponse(name=name, description=description, image_url=image_url)
+
+    except requests.exceptions.RequestException as e:
+        return JSONResponse(status_code=500, content={"message": f"Ошибка при получении данных с API: {str(e)}"})

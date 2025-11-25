@@ -18,7 +18,6 @@ router = APIRouter()
 
 @router.get("/horoscope", response_model=dict)
 async def get_horoscope():
-
     zodiac_name = "aries"
     url = f"https://horoscope-app-api.vercel.app/api/v1/get-horoscope/daily?sign={zodiac_name}&day=TODAY"
 
@@ -26,8 +25,13 @@ async def get_horoscope():
         response = requests.get(url)
         response.raise_for_status()
         horoscope_data = response.json()
-        horoscope_text = horoscope_data.get("horoscope", "Гороскоп пока недоступен")
-        content = f"Ваш гороскоп на сегодня:\n{horoscope_text}"
+
+        horoscope_text = horoscope_data["data"].get("horoscope_data", "Гороскоп пока недоступен")
+        content = f"Ваш гороскоп на сегодня ({horoscope_data['data']['date']}):\n{horoscope_text}"
+    except requests.exceptions.HTTPError as http_err:
+        content = f"Ошибка HTTP: {http_err}"
+    except requests.exceptions.RequestException as req_err:
+        content = f"Ошибка запроса: {req_err}"
     except Exception as e:
         content = f"Ошибка при получении гороскопа: {str(e)}"
 

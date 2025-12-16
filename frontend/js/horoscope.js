@@ -1,4 +1,43 @@
 const BACKEND_URL = 'https://poly-esoteric-backend.onrender.com';
+function goBackToIndex(e) {
+    if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+    console.log('Нажата стрелка, переход на index.html');
+    window.location.href = "index.html";
+}
+
+function setupArrowListeners() {
+    const arrows = document.querySelectorAll('.arrow');
+    console.log('Найдено стрелок:', arrows.length);
+    
+    arrows.forEach(arrow => {
+        arrow.removeEventListener('click', goBackToIndex);
+        arrow.addEventListener('click', goBackToIndex);
+        console.log('Обработчик добавлен для стрелки');
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM загружен, настраиваем стрелки...');
+
+    setupArrowListeners();
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.addedNodes.length) {
+                setupArrowListeners();
+            }
+        });
+    });
+
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+    initializePage();
+});
+
 async function getHoroscopeFromBackend(birthDate, userId) {
     try {
         console.log('Отправка запроса к бэкенду...');
@@ -17,7 +56,7 @@ async function getHoroscopeFromBackend(birthDate, userId) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        console.log('Данные получены от бэкенда:', data);
+        console.log('Данные получены от бэкенду:', data);
 
         const zodiacSign = 'aries';
         
@@ -68,71 +107,62 @@ async function fetchHoroscopeWithLoading(birthDate, userId) {
     }
 }
 
-async function sendUserDataToBackend(userData) {
-    try {
-        const response = await fetch(`${BACKEND_URL}/api/user`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(userData)
+function initializePage() {
+    const form = document.getElementById('birthdayForm');
+    const birthdateInput = document.getElementById('birthdateInput');
+    
+    if (form) {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (!birthdateInput.value) {
+                alert('Пожалуйста, введите дату рождения');
+                return;
+            }
+
+            const userInfo = getTelegramUserInfo();
+            await fetchHoroscopeWithLoading(birthdateInput.value, userInfo.userId);
         });
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
+        birthdateInput.addEventListener('keypress', async function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                form.dispatchEvent(new Event('submit'));
+            }
+        });
 
-        const result = await response.json();
-        console.log('Данные пользователя отправлены:', result);
-        return result;
+        const today = new Date().toISOString().split('T')[0];
+        birthdateInput.max = today;
+    }
+    
+    initializeTelegram();
+    console.log('Страница гороскопа загружена и готова');
+}
+
+function showResult(horoscopeData) {
+    try {
+        console.log('Получены данные для отображения:', horoscopeData);
+        
+        const zodiacSign = horoscopeData.zodiac_sign;
+        const horoscopeText = horoscopeData.horoscope_text;
+        
+        const zodiacSignElement = document.getElementById('zodiacSign');
+        const zodiacDescriptionElement = document.getElementById('zodiacDescription');
+        const resultElement = document.getElementById('result');
+        
+        if (zodiacSignElement && zodiacDescriptionElement && resultElement) {
+            zodiacDescriptionElement.textContent = horoscopeText;
+            resultElement.style.display = 'flex';
+            setTimeout(setupArrowListeners, 100);
+        }
         
     } catch (error) {
-        console.error('Ошибка отправки данных:', error);
-        throw error;
+        console.error('Ошибка отображения:', error);
+        showFallbackResult();
     }
 }
 
-class ApiClient {
-    constructor(baseURL) {
-        this.baseURL = baseURL;
-    }
-    async get(endpoint) {
-        const response = await fetch(`${this.baseURL}${endpoint}`);
-        if (!response.ok) throw new Error(`GET failed: ${response.status}`);
-        return response.json();
-    }
 
-    async post(endpoint, data) {
-        const response = await fetch(`${this.baseURL}${endpoint}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        });
-        if (!response.ok) throw new Error(`POST failed: ${response.status}`);
-        return response.json();
-    }
-    async put(endpoint, data) {
-        const response = await fetch(`${this.baseURL}${endpoint}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        });
-        if (!response.ok) throw new Error(`PUT failed: ${response.status}`);
-        return response.json();
-    }
-    async delete(endpoint) {
-        const response = await fetch(`${this.baseURL}${endpoint}`, {
-            method: 'DELETE'
-        });
-        if (!response.ok) throw new Error(`DELETE failed: ${response.status}`);
-        return response.json();
-    }
-}
-const api = new ApiClient(BACKEND_URL);
 function getZodiacSignByDate(dateString) {
     const date = new Date(dateString);
     const day = date.getDate();
@@ -151,34 +181,6 @@ function getZodiacSignName(englishName) {
     return signNames[englishName] || 'Неизвестный знак';
 }
 
-function showResult(horoscopeData) {
-    try {
-        console.log('Получены данные для отображения:', horoscopeData);
-        
-        const zodiacSign = horoscopeData.zodiac_sign;
-        const horoscopeText = horoscopeData.horoscope_text;
-        
-        const zodiacSignElement = document.getElementById('zodiacSign');
-        const zodiacDescriptionElement = document.getElementById('zodiacDescription');
-        const resultElement = document.getElementById('result');
-        
-        if (zodiacSignElement && zodiacDescriptionElement && resultElement) {
-            zodiacSignElement.textContent = getZodiacSignName(zodiacSign);
-            zodiacDescriptionElement.textContent = horoscopeText;
-            resultElement.style.display = 'flex';
-            
-            const resultTitle = document.querySelector('.result-title');
-            if (resultTitle) {
-                resultTitle.textContent = 'Ваш гороскоп на сегодня';
-            }
-        }
-        
-    } catch (error) {
-        console.error('Ошибка отображения:', error);
-        showFallbackResult();
-    }
-}
-
 function showFallbackResult() {
     try {
         const zodiacSignElement = document.getElementById('zodiacSign');
@@ -186,9 +188,11 @@ function showFallbackResult() {
         const resultElement = document.getElementById('result');
         
         if (zodiacSignElement && zodiacDescriptionElement && resultElement) {
-            zodiacSignElement.textContent = 'Овен';
+            zodiacSignElement.textContent = '';
             zodiacDescriptionElement.textContent = 'Сегодня звезды благоприятствуют новым начинаниям. Смело беритесь за сложные задачи!';
             resultElement.style.display = 'flex';
+        
+            setTimeout(setupArrowListeners, 100);
         }
     } catch (error) {
         console.error('Ошибка fallback:', error);
@@ -196,9 +200,19 @@ function showFallbackResult() {
 }
 
 function goBack() {
-    document.getElementById('result').style.display = 'none';
-    document.getElementById('loader').style.display = 'none';
-    document.querySelector('.content').style.display = 'block';
+    const resultElement = document.getElementById('result');
+    const loaderElement = document.getElementById('loader');
+    const contentElement = document.querySelector('.content');
+    
+    if (resultElement && resultElement.style.display === 'flex') {
+        resultElement.style.display = 'none';
+        if (contentElement) contentElement.style.display = 'block';
+    } else if (loaderElement && loaderElement.style.display === 'flex') {
+        loaderElement.style.display = 'none';
+        if (contentElement) contentElement.style.display = 'block';
+    } else {
+        goBackToIndex();
+    }
 }
 
 function initializeTelegram() {
@@ -213,36 +227,7 @@ function initializeTelegram() {
             });
         } catch (error) {
             console.log('BackButton не поддерживается');
-            createCustomBackButton();
         }
-    }
-}
-
-function createCustomBackButton() {
-    const existingBackButton = document.querySelector('.custom-back-button');
-    if (!existingBackButton) {
-        const backButton = document.createElement('button');
-        backButton.className = 'custom-back-button';
-        backButton.innerHTML = '← Назад';
-        backButton.style.cssText = `
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1000;
-            background: rgba(255,255,255,0.2);
-            border: 2px solid #CFE7FF;
-            color: #CFE7FF;
-            padding: 10px 15px;
-            border-radius: 20px;
-            font-family: "Geologica", sans-serif;
-            font-weight: 700;
-            cursor: pointer;
-            backdrop-filter: blur(10px);
-        `;
-        backButton.onclick = () => {
-            window.location.href = 'index.html';
-        };
-        document.body.appendChild(backButton);
     }
 }
 
@@ -271,62 +256,10 @@ function getTelegramUserInfo() {
         userId: Math.floor(Math.random() * 1000000)
     };
 }
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('birthdayForm');
-    const birthdateInput = document.getElementById('birthdateInput');
-    const returnButton = document.getElementById("return");
-    
-    initializeTelegram();
-    form.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
-        if (!birthdateInput.value) {
-            alert('Пожалуйста, введите дату рождения');
-            return;
-        }
 
-        const userInfo = getTelegramUserInfo();
-        await fetchHoroscopeWithLoading(birthdateInput.value, userInfo.userId);
-    });
-
-    birthdateInput.addEventListener('keypress', async function(e) {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            form.dispatchEvent(new Event('submit'));
-        }
-    });
-
-    returnButton.addEventListener("click", (e) => {
-        e.stopPropagation();
-        window.location.href = "index.html";
-    });
-
-    const today = new Date().toISOString().split('T')[0];
-    birthdateInput.max = today;
-    
-    console.log('Страница гороскопа загружена и готова');
-});
-
-const ApiUtils = {
-
-    checkResponse(response) {
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response;
-    },
-
-    handleError(error) {
-        console.error('Network error:', error);
-        throw error;
-    },
-
-    fetchWithTimeout(url, options = {}, timeout = 5000) {
-        return Promise.race([
-            fetch(url, options),
-            new Promise((_, reject) =>
-                setTimeout(() => reject(new Error('Request timeout')), timeout)
-            )
-        ]);
+document.addEventListener('click', function(e) {
+    if (e.target.closest('.arrow')) {
+        console.log('Клик по стрелке через делегирование');
+        goBackToIndex(e);
     }
-};
+});

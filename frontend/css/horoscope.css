@@ -375,17 +375,9 @@ body{
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 0 clamp(20px, 4vw, 40px);
+  padding: 0;
 }
-.result-body {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  text-align: center;
-}
+
 
 .result-title {
   font-size: clamp(24px, 4vw, 32px);
@@ -406,8 +398,157 @@ body{
   color: #e7edff;
   line-height: 1.5;
   max-width: 600px;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 20px;
-  border-radius: 20px;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+
 }
+
+/* .result-screen {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+} */
+
+.result-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1001;
+  background: linear-gradient(180deg, #090D19 17%, #6265FE 96%);
+}
+.result-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  text-align: center;
+}
+
+
+
+.image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-top: -30px;
+}
+
+.aries {
+  max-width: 500px;
+  height: auto;
+  margin-top: 20px;
+}
+.name-horoscope {
+  font-family: "Lobelia",sans-serif;
+  font-size: 50px;
+  font-weight:400;
+  color: #CFE7FF;
+  margin-top: 20px;
+  letter-spacing:1px;
+  line-height:1;
+  text-transform:uppercase;
+  color:#CFE7FF;
+  width:max-content;
+}
+
+.loader, .result-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #090D19 17%, #6265FE 96%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.loader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  width: 100%;
+}
+
+.loader-text-container {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.result-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+
+
+.name-horoscope {
+  font-family: "Lobelia", sans-serif;
+  font-size: 50px;
+  font-weight: 400;
+  color: #CFE7FF;
+  text-align: center;
+  letter-spacing: 1px;
+  line-height: 1;
+  text-transform: uppercase;
+  margin: 20px 0;
+}
+
+.panel {
+  border-radius: 50px 50px 0 0;
+  padding: 40px 30px;
+  background: rgba(190, 243, 223, 0.15);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px) saturate(120%);
+  -webkit-backdrop-filter: blur(10px) saturate(120%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 8px 30px rgba(14, 16, 40, 0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  height: 500px;
+}
+
+.result-screen {
+  position: fixed;
+  display: none;
+}
+
+.loader {
+  display: none;
+}
+.name-horoscope-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin: 10px 0 20px 0;
+  width: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.star-left, .star-right {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.9;
+}
+
+.star-left svg, .star-right svg {
+  width: clamp(40px, 8vw, 60px);
+  height: clamp(40px, 8vw, 60px);
+}
+

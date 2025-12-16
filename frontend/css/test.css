@@ -663,3 +663,149 @@ body{
 .dark-mage-result {
   background: linear-gradient(180deg, #B6BBFF 0%, #C7EDEF 30%, #949FD6 100%);
 }
+@media (max-height: 400px) {
+  body {
+    padding: 5px;
+  }
+  
+  .phone {
+    border-radius: 15px;
+  }
+  
+  .header {
+    padding: clamp(10px, 2vw, 20px) clamp(8px, 3vw, 20px) 0;
+    gap: 3px;
+  }
+  
+  .logo {
+    font-size: 14px;
+  }
+  
+  #title {
+    font-size: clamp(25px, 5vw, 45px);
+  }
+  
+  .main-title {
+    top: 15%;
+  }
+  
+  .question-number {
+    font-size: clamp(15px, 2.5vh, 25px);
+    margin-top: 2px;
+    max-height: 8vh;
+    -webkit-text-stroke: 0.7px #6265FE;
+    text-stroke: 0.7px #6265FE;
+  }
+  
+  .question-text {
+    font-size: clamp(16px, 3vh, 25px);
+    margin-bottom: 2px;
+    max-height: 10vh;
+    line-height: 1;
+    padding: 0 5px;
+  }
+  
+  .question-content {
+    padding: 0 clamp(5px, 2vw, 15px) clamp(3px, 1vw, 8px);
+  }
+  
+  .panel {
+    border-radius: clamp(15px, 3vw, 25px) clamp(15px, 3vw, 25px) 0 0;
+    padding: clamp(10px, 2vw, 15px) clamp(10px, 2vw, 15px) clamp(12px, 3vw, 20px);
+    gap: 5px;
+  }
+  
+  .button {
+    padding: clamp(10px, 2vw, 14px);
+    font-size: clamp(12px, 2.5vw, 16px);
+    min-height: 40px;
+    border-radius: 50px;
+  }
+  
+  .cta {
+    font-size: clamp(14px, 3vw, 20px);
+    margin-top: 10px;
+    margin-bottom: clamp(12px, 3vw, 20px);
+  }
+  
+  .image {
+    margin: 60px auto 30px;
+    max-width: 250px;
+  }
+  
+  .image1,
+  .image2 {
+    max-width: 80px;
+  }
+  
+  .image1 svg,
+  .image2 svg {
+    min-height: 70px;
+  }
+
+  .arrow {
+    right: clamp(10px, 2vw, 20px);
+    width: clamp(35px, 6vw, 50px);
+    height: clamp(35px, 6vw, 50px);
+  }
+  
+  .options {
+    gap: 8px;
+    max-width: 95%;
+  }
+  
+  .option {
+    padding: 12px;
+    border-radius: 15px;
+    font-size: clamp(14px, 3vw, 18px);
+  }
+  
+  .navigation {
+    padding: 8px clamp(15px, 3vw, 25px) 12px;
+  }
+  
+  .next-btn {
+    padding: 10px 25px;
+    max-width: 150px;
+    font-size: clamp(14px, 3vw, 16px);
+    border-radius: 20px;
+  }
+  
+  .progress-bar {
+    width: 80px;
+    height: 3px;
+    margin-top: 5px;
+  }
+  
+  .result-content {
+    padding: 0 clamp(15px, 3vw, 25px) clamp(8px, 2vw, 12px);
+  }
+  
+  .result-title-outline {
+    font-size: clamp(25px, 6vw, 40px);
+    margin-top: 10px;
+    letter-spacing: 1px;
+    -webkit-text-stroke: 0.7px #6265FE;
+    text-stroke: 0.7px #6265FE;
+  }
+  
+  .result-panel {
+    border-radius: clamp(25px, 3vw, 40px);
+    padding: clamp(15px, 3vw, 25px);
+    gap: 20px;
+    margin-bottom: 12px;
+    max-height: 30vh;
+  }
+  
+  .result-description {
+    font-size: clamp(12px, 2.5vw, 16px);
+    line-height: 1.3;
+  }
+  
+  #backButton {
+    margin-top: 15px;
+    padding: 8px 15px;
+    border-radius: 10px;
+    font-size: clamp(12px, 2.5vw, 14px);
+  }
+}

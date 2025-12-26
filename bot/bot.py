@@ -55,6 +55,6 @@ def handle_messages(message):
 
         bot.send_message(message.chat.id, guides_msg, parse_mode='HTML')
 
-if __name__ == "__main__":
-    print("Бот запущен...")
-    bot.infinity_polling()
+def run_bot():
+    print("Telegram bot started")
+    bot.infinity_polling(skip_pending=True)

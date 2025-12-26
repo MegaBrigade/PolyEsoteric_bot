@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from routes import horoscope, card
 import threading
 
-from backend.bot.bot import run_bot
+from bot.bot import run_bot
 
 app = FastAPI(title="PolyEsoteric Backend")
 

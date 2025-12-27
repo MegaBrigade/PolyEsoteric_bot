@@ -4,22 +4,18 @@ from supabase import create_client, Client
 
 load_dotenv()
 
-SUPABASE_URL = os.getenv("SUPABASE_URL")
-SUPABASE_KEY = os.getenv("SUPABASE_KEY")
+_supabase: Client | None = None
 
-if not SUPABASE_URL or not SUPABASE_KEY:
-    raise RuntimeError("❌ Ошибка: SUPABASE_URL или SUPABASE_KEY не найдены в .env")
+def get_supabase() -> Client:
+    global _supabase
 
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+    if _supabase is None:
+        url = os.getenv("SUPABASE_URL")
+        key = os.getenv("SUPABASE_KEY")
 
-def add_check_record():
-    try:
-        data = {"name": "Запись из database.py"}
-        res = supabase.table("test_table").insert(data).execute()
-        print("✅ Успех! Запись добавлена в базу данных.")
-        print(f"Данные из базы: {res.data}")
-    except Exception as e:
-        print(f"❌ Произошла ошибка при добавлении: {e}")
+        if not url or not key:
+            raise RuntimeError("SUPABASE_URL или SUPABASE_KEY не заданы")
 
-if __name__ == "__main__":
-    add_check_record()
+        _supabase = create_client(url, key)
+
+    return _supabase

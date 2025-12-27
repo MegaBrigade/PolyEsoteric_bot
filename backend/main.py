@@ -7,7 +7,6 @@ from routes import horoscope, card
 
 app = FastAPI(title="PolyEsoteric Backend")
 
-# Настройки CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],

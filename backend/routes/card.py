@@ -1,7 +1,7 @@
 import random
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from backend.database import get_supabase
+from database import get_supabase
 
 router = APIRouter()
 

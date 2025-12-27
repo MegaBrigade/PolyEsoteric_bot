@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from datetime import datetime
 import requests
 
-from backend.database import get_supabase
+from database import get_supabase
 
 router = APIRouter()
 

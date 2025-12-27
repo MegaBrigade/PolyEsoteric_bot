@@ -5,9 +5,6 @@ from backend.database import get_supabase
 
 router = APIRouter()
 
-PROJECT_ID = "wjgwfemvxxrgnyfutvqf"
-BASE_STORAGE_URL = f"https://{PROJECT_ID}.supabase.co/storage/v1/object/public/assets/"
-
 TAROT_CARDS = [
     "fool",
     "magician",
@@ -29,26 +26,21 @@ TAROT_CARDS = [
     "star",
     "moon",
     "sun",
-    "world"
+    "world",
 ]
 
-
 class TarotResponse(BaseModel):
-    name_ru: str
     description: str
     image_url: str
-
 
 @router.get("/card", response_model=TarotResponse)
 def get_card_of_the_day():
     card_name = random.choice(TAROT_CARDS)
-
     supabase = get_supabase()
-
     result = (
         supabase
         .table("tarot_cards")
-        .select("name, description, file_path")
+        .select("description, file_path")
         .eq("name", card_name)
         .single()
         .execute()
@@ -57,15 +49,12 @@ def get_card_of_the_day():
     if not result.data:
         raise HTTPException(
             status_code=404,
-            detail=f"Карта '{card_name}' не найдена в базе данных"
+            detail="Карта не найдена в базе данных"
         )
 
     card = result.data
 
-    full_image_url = f"{BASE_STORAGE_URL}{card['file_path']}"
-
     return TarotResponse(
-        name_ru=card["name"],
         description=card["description"],
-        image_url=full_image_url,
+        image_url=card["file_path"],
     )

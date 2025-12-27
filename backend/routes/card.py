@@ -1,30 +1,60 @@
-from fastapi import APIRouter
+import random
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-import requests
+from backend.database import get_supabase
 
 router = APIRouter()
 
+TAROT_CARDS = [
+    "fool",
+    "magician",
+    "high_priestess",
+    "empress",
+    "emperor",
+    "hierophant",
+    "lovers",
+    "chariot",
+    "strength",
+    "hermit",
+    "fortune",
+    "justice",
+    "hanged_man",
+    "death",
+    "temperance",
+    "devil",
+    "tower",
+    "star",
+    "moon",
+    "sun",
+    "world",
+]
+
 class TarotResponse(BaseModel):
-    name: str
     description: str
     image_url: str
 
 @router.get("/card", response_model=TarotResponse)
-async def get_random_tarot():
-    url = "https://tarot-api.dev/api/v1/random"
+def get_card_of_the_day():
+    card_name = random.choice(TAROT_CARDS)
+    supabase = get_supabase()
+    result = (
+        supabase
+        .table("tarot_cards")
+        .select("description, image_url")
+        .eq("name", card_name)
+        .single()
+        .execute()
+    )
 
-    try:
-        response = requests.get(url)
+    if not result.data:
+        raise HTTPException(
+            status_code=404,
+            detail="Карта не найдена в базе данных"
+        )
 
-        response.raise_for_status()
+    card = result.data
 
-        card_data = response.json()
-
-        name = card_data.get("name", "Неизвестная карта")
-        description = card_data.get("description", "Описание недоступно")
-        image_url = card_data.get("image", "")
-
-        return TarotResponse(name=name, description=description, image_url=image_url)
-
-    except requests.exceptions.RequestException as e:
-        return {"message": f"Ошибка при получении данных с API: {str(e)}"}
+    return TarotResponse(
+        description=card["description"],
+        image_url=card["image_url"],
+    )

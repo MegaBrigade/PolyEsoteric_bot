@@ -7,12 +7,18 @@ from backend.database import get_supabase
 
 router = APIRouter()
 
+PROJECT_ID = "wjgwfemvxxrgnyfutvqf"  # Твой ID проекта
+BASE_STORAGE_URL = f"https://{PROJECT_ID}.supabase.co/storage/v1/object/public/assets/"
+
+
 class HoroscopeRequest(BaseModel):
     birth_date: str
+
 
 class HoroscopeResponse(BaseModel):
     prediction: str
     image_url: str
+
 
 def get_zodiac_sign(birth_date):
     day = birth_date.day
@@ -42,24 +48,32 @@ def get_zodiac_sign(birth_date):
     else:
         return "pisces"
 
+
 @router.post("/horoscope", response_model=HoroscopeResponse)
 def get_horoscope(data: HoroscopeRequest):
-    birth_date = datetime.strptime(data.birth_date, "%d-%m-%Y").date()
-    zodiac = get_zodiac_sign(birth_date)
-    api_url = f"https://horoscope-app-api.vercel.app/api/v1/get-horoscope/daily?sign={zodiac}&day=TODAY"
+    try:
+        birth_date = datetime.strptime(data.birth_date, "%d-%m-%Y").date()
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Неверный формат даты. Используйте ДД-ММ-ГГГГ")
 
+    zodiac = get_zodiac_sign(birth_date)
+
+    api_url = f"https://horoscope-app-api.vercel.app/api/v1/get-horoscope/daily?sign={zodiac}&day=TODAY"
     try:
         response = requests.get(api_url, timeout=10)
         response.raise_for_status()
         horoscope_data = response.json()
         prediction = horoscope_data["data"].get("horoscope_data", "Предсказание недоступно")
     except Exception:
-        raise HTTPException(status_code=502, detail="Ошибка при получении гороскопа")
+        prediction = "Сегодня звезды молчат, попробуйте позже."
 
     supabase = get_supabase()
     result = supabase.table("zodiac_signs").select("file_path").eq("name", zodiac).single().execute()
+
     if not result.data:
         raise HTTPException(status_code=404, detail="Изображение знака не найдено")
-    image_url = result.data["file_path"]
 
-    return HoroscopeResponse(prediction=prediction, image_url=image_url)
+    file_name = result.data["file_path"]
+    full_image_url = f"{BASE_STORAGE_URL}{file_name}"
+
+    return HoroscopeResponse(prediction=prediction, image_url=full_image_url)

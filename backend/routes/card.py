@@ -42,17 +42,14 @@ def get_card_of_the_day():
         .table("tarot_cards")
         .select("description, file_path")
         .eq("name", card_name)
-        .single()
+        .limit(1)
         .execute()
     )
 
     if not result.data:
-        raise HTTPException(
-            status_code=404,
-            detail="Карта не найдена в базе данных"
-        )
+        raise HTTPException(status_code=404, detail="Карта не найдена")
 
-    card = result.data
+    card = result.data[0]
 
     return TarotResponse(
         description=card["description"],

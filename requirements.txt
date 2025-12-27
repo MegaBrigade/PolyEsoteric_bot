@@ -6,3 +6,4 @@ python-multipart
 requests
 translate
 supabase
+deep-translator

@@ -2,6 +2,7 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from datetime import datetime
 import requests
+from deep_translator import GoogleTranslator
 
 from database import get_supabase
 
@@ -46,20 +47,35 @@ def get_zodiac_sign(birth_date):
 def get_horoscope(data: HoroscopeRequest):
     birth_date = datetime.strptime(data.birth_date, "%d-%m-%Y").date()
     zodiac = get_zodiac_sign(birth_date)
+
     api_url = f"https://horoscope-app-api.vercel.app/api/v1/get-horoscope/daily?sign={zodiac}&day=TODAY"
 
     try:
         response = requests.get(api_url, timeout=10)
         response.raise_for_status()
         horoscope_data = response.json()
-        prediction = horoscope_data["data"].get("horoscope_data", "Предсказание недоступно")
+        prediction_en = horoscope_data["data"].get("horoscope_data", "Предсказание недоступно")
+
+        prediction_ru = GoogleTranslator(source="en", target="ru").translate(prediction_en)
     except Exception:
-        raise HTTPException(status_code=502, detail="Ошибка при получении гороскопа")
+        raise HTTPException(status_code=502, detail="Ошибка при получении или переводе гороскопа")
 
     supabase = get_supabase()
-    result = supabase.table("zodiac_signs").select("file_path").eq("name", zodiac).single().execute()
+    result = (
+        supabase
+        .table("zodiac_signs")
+        .select("file_path")
+        .eq("name", zodiac)
+        .limit(1)
+        .execute()
+    )
+
     if not result.data:
         raise HTTPException(status_code=404, detail="Изображение знака не найдено")
-    image_url = result.data["file_path"]
 
-    return HoroscopeResponse(prediction=prediction, image_url=image_url)
+    image_url = result.data[0]["file_path"]
+
+    return HoroscopeResponse(
+        prediction=prediction_ru,
+        image_url=image_url
+    )

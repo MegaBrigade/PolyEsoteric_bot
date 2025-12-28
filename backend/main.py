@@ -1,6 +1,7 @@
 import threading
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from datetime import datetime
 
 from bot.bot import run_bot
 from routes import horoscope, card
@@ -24,5 +25,9 @@ def start_bot():
     bot_thread.start()
 
 @app.get("/ping")
-def ping():
-    return {"status": "ok"}
+async def ping():
+    return {
+        "status": "active",
+        "service": "PolyEsoteric Bot",
+        "timestamp": datetime.now().isoformat()
+    }

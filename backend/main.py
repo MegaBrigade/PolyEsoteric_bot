@@ -24,10 +24,6 @@ def start_bot():
     bot_thread = threading.Thread(target=run_bot, daemon=True)
     bot_thread.start()
 
-@app.get("/ping")
+@app.api_route("/ping", methods=["GET", "HEAD"])
 async def ping():
-    return {
-        "status": "active",
-        "service": "PolyEsoteric Bot",
-        "timestamp": datetime.now().isoformat()
-    }
+    return {"status": "ok"}

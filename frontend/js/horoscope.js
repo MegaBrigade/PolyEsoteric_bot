@@ -1,3 +1,4 @@
+
 const BACKEND_URL = 'https://poly-esoteric-backend.onrender.com';
 function goBackToIndex(e) {
     if (e) {
@@ -38,45 +39,58 @@ document.addEventListener('DOMContentLoaded', function() {
     initializePage();
 });
 
+
+
 async function getHoroscopeFromBackend(birthDate, userId) {
     try {
         console.log('Отправка запроса к бэкенду...');
-    
+        
+        // Преобразуем дату из формата YYYY-MM-DD в DD-MM-YYYY
+        const [year, month, day] = birthDate.split('-');
+        const formattedDate = `${day}-${month}-${year}`;
+        
+        console.log('Форматированная дата для бэкенда:', formattedDate);
+        
         const response = await fetch(`${BACKEND_URL}/api/horoscope`, {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
-            }
+            },
+            body: JSON.stringify({
+                birth_date: formattedDate
+            })
         });
 
         console.log('Статус ответа:', response.status);
         
+        if (response.status === 404) {
+            throw new Error('404: Картинка знака зодиака не найдена');
+        }
+        
+        if (response.status === 502) {
+            throw new Error('502: Сервис гороскопов временно недоступен');
+        }
+        
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
+        
         const data = await response.json();
-        console.log('Данные получены от бэкенду:', data);
+        console.log('Данные получены от бэкенда:', data);
 
-        const zodiacSign = 'aries';
+        const zodiacSign = getZodiacSignByDate(birthDate);
         
         return {
             zodiac_sign: zodiacSign,
-            horoscope_text: data.content,
-            slide_id: `${zodiacSign}_daily`
+            horoscope_text: data.prediction,
+            slide_id: `${zodiacSign}_daily`,
+            image_url: data.image_url
         };
         
     } catch (error) {
-        console.error('Ошибка при запросе к бэкенду:', error);
-
-        const zodiacSign = 'aries';
-        const horoscopeText = "Сегодня у Овнов прекрасный день! Энергия Марса наполняет вас силой. Идеальное время для новых начинаний.";
-        
-        return {
-            zodiac_sign: zodiacSign,
-            horoscope_text: horoscopeText,
-            slide_id: `${zodiacSign}_daily`
-        };
+        console.error('Ошибка при запросу к бэкенду:', error);
+        throw error;
     }
 }
 
@@ -98,11 +112,22 @@ async function fetchHoroscopeWithLoading(birthDate, userId) {
     } catch (error) {
         console.error('Ошибка:', error);
         loader.style.display = 'none';
+        let errorMessage = 'Извините, произошла ошибка при загрузке гороскопа. Пожалуйста, попробуйте позже.';
+        let zodiacSign = 'unknown';
+        
+        if (error.message.includes('404')) {
+            errorMessage = 'Знак зодиака не найден в базе данных. Пожалуйста, проверьте введенную дату.';
+            zodiacSign = 'error';
+        } else if (error.message.includes('502')) {
+            errorMessage = 'Сервис гороскопов временно недоступен. Попробуйте позже.';
+            zodiacSign = 'error';
+        }
         
         showResult({
-            zodiac_sign: 'aries',
-            horoscope_text: 'Извините, произошла ошибка при загрузке гороскопа. Пожалуйста, попробуйте позже.',
-            slide_id: 'error'
+            zodiac_sign: zodiacSign,
+            horoscope_text: errorMessage,
+            slide_id: 'error',
+            image_url: null
         });
     }
 }
@@ -145,13 +170,24 @@ function showResult(horoscopeData) {
         
         const zodiacSign = horoscopeData.zodiac_sign;
         const horoscopeText = horoscopeData.horoscope_text;
+        const imageUrl = horoscopeData.image_url;
         
         const zodiacSignElement = document.getElementById('zodiacSign');
         const zodiacDescriptionElement = document.getElementById('zodiacDescription');
         const resultElement = document.getElementById('result');
+        const zodiacNameElement = document.querySelector('.name-horoscope');
+        const imageContainer = document.querySelector('.image svg image');
         
         if (zodiacSignElement && zodiacDescriptionElement && resultElement) {
             zodiacDescriptionElement.textContent = horoscopeText;
+            if (zodiacNameElement) {
+                zodiacNameElement.textContent = getZodiacSignName(zodiacSign);
+            }
+            if (imageUrl && imageContainer) {
+                imageContainer.setAttribute('href', imageUrl);
+                imageContainer.setAttribute('xlink:href', imageUrl);
+            }
+            
             resultElement.style.display = 'flex';
             setTimeout(setupArrowListeners, 100);
         }
@@ -162,7 +198,6 @@ function showResult(horoscopeData) {
     }
 }
 
-
 function getZodiacSignByDate(dateString) {
     const date = new Date(dateString);
     const day = date.getDate();
@@ -170,6 +205,17 @@ function getZodiacSignByDate(dateString) {
     
     if ((month === 3 && day >= 21) || (month === 4 && day <= 19)) return 'aries';
     if ((month === 4 && day >= 20) || (month === 5 && day <= 20)) return 'taurus';
+    if ((month === 5 && day >= 21) || (month === 6 && day <= 20)) return 'gemini';
+    if ((month === 6 && day >= 21) || (month === 7 && day <= 22)) return 'cancer';
+    if ((month === 7 && day >= 23) || (month === 8 && day <= 22)) return 'leo';
+    if ((month === 8 && day >= 23) || (month === 9 && day <= 22)) return 'virgo';
+    if ((month === 9 && day >= 23) || (month === 10 && day <= 22)) return 'libra';
+    if ((month === 10 && day >= 23) || (month === 11 && day <= 21)) return 'scorpio';
+    if ((month === 11 && day >= 22) || (month === 12 && day <= 21)) return 'sagittarius';
+    if ((month === 12 && day >= 22) || (month === 1 && day <= 19)) return 'capricorn';
+    if ((month === 1 && day >= 20) || (month === 2 && day <= 18)) return 'aquarius';
+    if ((month === 2 && day >= 19) || (month === 3 && day <= 20)) return 'pisces';
+    
     return 'unknown';
 }
 
@@ -177,6 +223,18 @@ function getZodiacSignName(englishName) {
     const signNames = {
         'aries': 'Овен',
         'taurus': 'Телец',
+        'gemini': 'Близнецы',
+        'cancer': 'Рак',
+        'leo': 'Лев',
+        'virgo': 'Дева',
+        'libra': 'Весы',
+        'scorpio': 'Скорпион',
+        'sagittarius': 'Стрелец',
+        'capricorn': 'Козерог',
+        'aquarius': 'Водолей',
+        'pisces': 'Рыбы',
+        'unknown': 'Неизвестный знак',
+        'error': 'Ошибка'
     };
     return signNames[englishName] || 'Неизвестный знак';
 }
@@ -186,12 +244,16 @@ function showFallbackResult() {
         const zodiacSignElement = document.getElementById('zodiacSign');
         const zodiacDescriptionElement = document.getElementById('zodiacDescription');
         const resultElement = document.getElementById('result');
+        const zodiacNameElement = document.querySelector('.name-horoscope');
         
         if (zodiacSignElement && zodiacDescriptionElement && resultElement) {
-            zodiacSignElement.textContent = '';
-            zodiacDescriptionElement.textContent = 'Сегодня звезды благоприятствуют новым начинаниям. Смело беритесь за сложные задачи!';
+            zodiacDescriptionElement.textContent = 'Извините, произошла ошибка при загрузке гороскопа. Пожалуйста, попробуйте позже.';
+            
+            if (zodiacNameElement) {
+                zodiacNameElement.textContent = 'Ошибка';
+            }
+            
             resultElement.style.display = 'flex';
-        
             setTimeout(setupArrowListeners, 100);
         }
     } catch (error) {

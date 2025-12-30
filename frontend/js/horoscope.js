@@ -1,5 +1,6 @@
 
 const BACKEND_URL = 'https://poly-esoteric-backend.onrender.com';
+
 function goBackToIndex(e) {
     if (e) {
         e.preventDefault();
@@ -39,62 +40,32 @@ document.addEventListener('DOMContentLoaded', function() {
     initializePage();
 });
 
+async function getHoroscopeFromBackend(birthDate) {
+    const [year, month, day] = birthDate.split('-');
+    const formattedDate = `${day}-${month}-${year}`;
+    
+    console.log('Отправка запроса к бэкенду с датой:', formattedDate);
+    
+    const response = await fetch(`${BACKEND_URL}/api/horoscope`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+            birth_date: formattedDate
+        })
+    });
 
-
-async function getHoroscopeFromBackend(birthDate, userId) {
-    try {
-        console.log('Отправка запроса к бэкенду...');
-        
-        // Преобразуем дату из формата YYYY-MM-DD в DD-MM-YYYY
-        const [year, month, day] = birthDate.split('-');
-        const formattedDate = `${day}-${month}-${year}`;
-        
-        console.log('Форматированная дата для бэкенда:', formattedDate);
-        
-        const response = await fetch(`${BACKEND_URL}/api/horoscope`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                birth_date: formattedDate
-            })
-        });
-
-        console.log('Статус ответа:', response.status);
-        
-        if (response.status === 404) {
-            throw new Error('404: Картинка знака зодиака не найдена');
-        }
-        
-        if (response.status === 502) {
-            throw new Error('502: Сервис гороскопов временно недоступен');
-        }
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const data = await response.json();
-        console.log('Данные получены от бэкенда:', data);
-
-        const zodiacSign = getZodiacSignByDate(birthDate);
-        
-        return {
-            zodiac_sign: zodiacSign,
-            horoscope_text: data.prediction,
-            slide_id: `${zodiacSign}_daily`,
-            image_url: data.image_url
-        };
-        
-    } catch (error) {
-        console.error('Ошибка при запросу к бэкенду:', error);
-        throw error;
+    if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`HTTP ${response.status}: ${errorText}`);
     }
+    
+    return await response.json();
 }
 
-async function fetchHoroscopeWithLoading(birthDate, userId) {
+async function fetchHoroscopeWithLoading(birthDate) {
     const loader = document.getElementById('loader');
     const content = document.querySelector('.content');
     
@@ -103,32 +74,20 @@ async function fetchHoroscopeWithLoading(birthDate, userId) {
         loader.style.display = 'flex';
         
         console.log('Начало получения гороскопа...');
-        const horoscopeData = await getHoroscopeFromBackend(birthDate, userId);
+        const horoscopeData = await getHoroscopeFromBackend(birthDate);
 
         await new Promise(resolve => setTimeout(resolve, 1000));
         loader.style.display = 'none';
-        showResult(horoscopeData);
+        showResult(horoscopeData, birthDate);
         
     } catch (error) {
         console.error('Ошибка:', error);
         loader.style.display = 'none';
-        let errorMessage = 'Извините, произошла ошибка при загрузке гороскопа. Пожалуйста, попробуйте позже.';
-        let zodiacSign = 'unknown';
-        
-        if (error.message.includes('404')) {
-            errorMessage = 'Знак зодиака не найден в базе данных. Пожалуйста, проверьте введенную дату.';
-            zodiacSign = 'error';
-        } else if (error.message.includes('502')) {
-            errorMessage = 'Сервис гороскопов временно недоступен. Попробуйте позже.';
-            zodiacSign = 'error';
-        }
         
         showResult({
-            zodiac_sign: zodiacSign,
-            horoscope_text: errorMessage,
-            slide_id: 'error',
+            prediction: 'Извините, произошла ошибка при загрузке гороскопа. Пожалуйста, попробуйте позже.',
             image_url: null
-        });
+        }, birthDate);
     }
 }
 
@@ -145,8 +104,7 @@ function initializePage() {
                 return;
             }
 
-            const userInfo = getTelegramUserInfo();
-            await fetchHoroscopeWithLoading(birthdateInput.value, userInfo.userId);
+            await fetchHoroscopeWithLoading(birthdateInput.value);
         });
 
         birthdateInput.addEventListener('keypress', async function(e) {
@@ -164,25 +122,26 @@ function initializePage() {
     console.log('Страница гороскопа загружена и готова');
 }
 
-function showResult(horoscopeData) {
+function showResult(horoscopeData, birthDate) {
     try {
         console.log('Получены данные для отображения:', horoscopeData);
         
-        const zodiacSign = horoscopeData.zodiac_sign;
-        const horoscopeText = horoscopeData.horoscope_text;
+        const zodiacSign = getZodiacSignByDate(birthDate);
+        const horoscopeText = horoscopeData.prediction;
         const imageUrl = horoscopeData.image_url;
         
-        const zodiacSignElement = document.getElementById('zodiacSign');
         const zodiacDescriptionElement = document.getElementById('zodiacDescription');
         const resultElement = document.getElementById('result');
         const zodiacNameElement = document.querySelector('.name-horoscope');
         const imageContainer = document.querySelector('.image svg image');
         
-        if (zodiacSignElement && zodiacDescriptionElement && resultElement) {
+        if (zodiacDescriptionElement && resultElement) {
             zodiacDescriptionElement.textContent = horoscopeText;
+            
             if (zodiacNameElement) {
                 zodiacNameElement.textContent = getZodiacSignName(zodiacSign);
             }
+            
             if (imageUrl && imageContainer) {
                 imageContainer.setAttribute('href', imageUrl);
                 imageContainer.setAttribute('xlink:href', imageUrl);
@@ -241,12 +200,11 @@ function getZodiacSignName(englishName) {
 
 function showFallbackResult() {
     try {
-        const zodiacSignElement = document.getElementById('zodiacSign');
         const zodiacDescriptionElement = document.getElementById('zodiacDescription');
         const resultElement = document.getElementById('result');
         const zodiacNameElement = document.querySelector('.name-horoscope');
         
-        if (zodiacSignElement && zodiacDescriptionElement && resultElement) {
+        if (zodiacDescriptionElement && resultElement) {
             zodiacDescriptionElement.textContent = 'Извините, произошла ошибка при загрузке гороскопа. Пожалуйста, попробуйте позже.';
             
             if (zodiacNameElement) {
@@ -291,32 +249,6 @@ function initializeTelegram() {
             console.log('BackButton не поддерживается');
         }
     }
-}
-
-function getTelegramUserInfo() {
-    try {
-        if (window.Telegram && Telegram.WebApp && Telegram.WebApp.initDataUnsafe) {
-            const user = Telegram.WebApp.initDataUnsafe.user;
-            if (user) {
-                return {
-                    username: user.username,
-                    firstName: user.first_name,
-                    lastName: user.last_name,
-                    userId: user.id,
-                    exists: true
-                };
-            }
-        }
-    } catch (error) {
-        console.error('Error getting Telegram user info:', error);
-    }
-
-    return { 
-        exists: false,
-        firstName: 'Странник',
-        username: 'guest',
-        userId: Math.floor(Math.random() * 1000000)
-    };
 }
 
 document.addEventListener('click', function(e) {

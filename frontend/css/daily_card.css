@@ -146,7 +146,6 @@ body{
   font-weight: 700;
   font-size: clamp(24px, 3vw, 32px);
   color: #6265FE;
-  line-height: 1.5;
   max-width: 600px;
   text-align: center;
 }

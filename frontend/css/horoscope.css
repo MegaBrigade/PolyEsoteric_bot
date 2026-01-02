@@ -398,16 +398,29 @@ body{
   color: #e7edff;
   line-height: 1.5;
   max-width: 600px;
-  text-align: center;
-
+  margin-top: -70px;
+}
+.horoscope-text {
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 100%;
+    padding: 20px 40px;
+    box-sizing: border-box;
+    text-align: justify;
 }
 
-/* .result-screen {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-} */
+@media (max-width: 768px) {
+    .horoscope-text {
+        font-size: 15px;
+    }
+}
 
+@media (max-width: 480px) {
+    .horoscope-text {
+        font-size: 10px;
+        line-height: 1.5;
+    }
+}
 .result-screen {
   position: absolute;
   top: 0;
@@ -426,8 +439,6 @@ body{
   padding: 0;
   text-align: center;
 }
-
-
 
 .image {
   display: flex;
@@ -491,8 +502,6 @@ body{
   width: 100%;
 }
 
-
-
 .name-horoscope {
   font-family: "Lobelia", sans-serif;
   font-size: 50px;
@@ -517,7 +526,7 @@ body{
   flex-direction: column;
   gap: 10px;
   width: 100%;
-  height: 500px;
+  height: 350px;
 }
 
 .result-screen {
@@ -551,4 +560,3 @@ body{
   width: clamp(40px, 8vw, 60px);
   height: clamp(40px, 8vw, 60px);
 }
-

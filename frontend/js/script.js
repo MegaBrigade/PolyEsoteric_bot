@@ -82,7 +82,6 @@ function initializeTelegramWebApp() {
         Telegram.WebApp.ready();
         Telegram.WebApp.expand();
         
-        // Обновляем приветствие после инициализации Telegram
         const titleElement = document.getElementById('title');
         if (titleElement) {
             titleElement.textContent = createPersonalizedGreeting();
@@ -110,30 +109,6 @@ function initializeApp() {
 }
 
 document.addEventListener('DOMContentLoaded', initializeApp);
-
-button.addEventListener('click', async () => {
-    response.textContent = 'Посылаю запрос во вселенную...';
-    window.location.href = 'horoscope.html';
-    try {
-        const userInfo = getTelegramUserInfo();
-        
-        const res = await fetch('/api/test', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 
-                message: 'Хочу узнать свой гороскоп', 
-                user_info: userInfo,
-                timestamp: new Date().toISOString()
-            })
-        });
-
-        const data = await res.json();
-        response.textContent = `${data.reply}`;
-    } catch (err) {
-        console.error(err);
-        response.textContent = 'Твое будущее туманно...';
-    }
-});
 
 tarotButton.addEventListener('click', async () => {
     window.location.href = 'tarot.html';

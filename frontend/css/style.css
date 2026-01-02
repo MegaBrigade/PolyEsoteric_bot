@@ -129,7 +129,7 @@ body{
 
 .panel {
   border-radius:clamp(35px,4vw,50px) clamp(35px,4vw,50px) 0 0;
-  padding: clamp(30px, 5vw, 20px);
+  padding: clamp(50px, 5vw, 70px);
   background:rgba(190,243,223,0.15);
   border:1px solid var(--glass-border);
   backdrop-filter:blur(10px) saturate(120%);
@@ -141,6 +141,7 @@ body{
   width:100%;
   flex-grow:1;
   justify-content:flex-end;
+
 }
 
 .button{

@@ -2,27 +2,6 @@ const button = document.getElementById("buttonG");
 const response = document.getElementById("title");
 const tarotButton = document.getElementById("buttonCard");
 const magesButton = document.getElementById("buttonT");
-// === ТЕСТОВЫЕ ДАННЫЕ ===
-if (!window.Telegram) {
-    console.log('🔧 Загружаем тестовые данные Telegram...');
-    window.Telegram = {
-        WebApp: {
-            initData: 'user=%7B%22id%22%3A123456789%2C%22first_name%22%3A%22%D0%98%D0%B2%D0%B0%D0%BD%22%2C%22last_name%22%3A%22%D0%9F%D0%B5%D1%82%D1%80%D0%BE%D0%B2%22%2C%22username%22%3A%22ivan_petrov%22%2C%22language_code%22%3A%22ru%22%7D',
-            initDataUnsafe: {
-                user: {
-                    id: 123456789,
-                    first_name: 'Иван',
-                    last_name: 'Петров', 
-                    username: 'ivan_petrov',
-                    language_code: 'ru'
-                }
-            },
-            version: '6.0',
-            platform: 'tdesktop'
-        }
-    };
-}
-// === КОНЕЦ ТЕСТОВЫХ ДАННЫХ ===
 
 function getTelegramUserInfo() {
     try {
@@ -83,10 +62,7 @@ function createPersonalizedGreeting() {
     const userInfo = getTelegramUserInfo();
     
     if (userInfo.exists) {
-        const userName = userInfo.username 
-            ? `@${userInfo.username}` 
-            : userInfo.firstName || 'странник';
-        
+        const userName = userInfo.firstName || userInfo.username || 'странник';
         const greetings = [
             `Услышь зов судьбы, ${userName}`,
             `${userName}, судьба готовит тебе небольшой подарок!`,
@@ -97,8 +73,21 @@ function createPersonalizedGreeting() {
         
         return greetings[Math.floor(Math.random() * greetings.length)];
     }
-    
-    return 'Приветствую, о странник!';
+    return 'Приветствуем тебя, странник!';
+}
+
+function initializeTelegramWebApp() {
+    if (window.Telegram && Telegram.WebApp) {
+        console.log('Telegram Web App initialized');
+        Telegram.WebApp.ready();
+        Telegram.WebApp.expand();
+        
+        // Обновляем приветствие после инициализации Telegram
+        const titleElement = document.getElementById('title');
+        if (titleElement) {
+            titleElement.textContent = createPersonalizedGreeting();
+        }
+    }
 }
 
 function initializeApp() {
@@ -116,9 +105,9 @@ function initializeApp() {
     if (isInTelegram) {
         console.log('Версия Telegram Web App:', Telegram.WebApp.version);
         console.log('Платформа:', Telegram.WebApp.platform);
+        initializeTelegramWebApp();
     }
 }
-
 
 document.addEventListener('DOMContentLoaded', initializeApp);
 

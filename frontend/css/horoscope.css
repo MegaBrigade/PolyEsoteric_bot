@@ -227,6 +227,42 @@ body{
   flex-direction: column;
   gap: 20px;
 }
+/* .birthday-form {
+  width: 80%;
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+} */
+
+@media (max-width: 768px) {
+  .birthday-form {
+    width: 100%;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 600px) {
+  .birthday-form {
+    width: 95%;
+    max-width: 350px;
+    gap: 15px;
+  }
+}
+
+@media (max-width: 460px) {
+  .birthday-form {
+    width: 100%;
+    gap: 12px;
+  }
+  
+  .date-input,
+  .submit-btn {
+    padding: 16px;
+    font-size: 16px;
+  }
+}
 
 .date-input {
   width: 100%;

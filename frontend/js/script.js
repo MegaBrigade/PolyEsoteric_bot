@@ -1,6 +1,7 @@
 const button = document.getElementById("buttonG");
 const tarotButton = document.getElementById("buttonCard");
 const magesButton = document.getElementById("buttonT");
+const titleElement = document.getElementById("title");
 
 function updateDate() {
     const dateElement = document.querySelector('.date p');
@@ -30,34 +31,23 @@ function getTelegramDisplayName() {
 }
 
 function setGreeting() {
-    const titleElement = document.getElementById('title');
-    if (!titleElement) return;
-
     const name = getTelegramDisplayName();
     titleElement.textContent = `Приветствуем тебя, ${name}!`;
-}
-
-function initializeTelegramWebApp() {
-    if (!window.Telegram || !Telegram.WebApp) return;
-
-    Telegram.WebApp.ready();
-    Telegram.WebApp.expand();
-
-    console.log('Telegram user:', Telegram.WebApp.initDataUnsafe?.user);
-
-    setGreeting();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     updateDate();
 
     if (window.Telegram && Telegram.WebApp) {
-        initializeTelegramWebApp();
+        Telegram.WebApp.ready();
+        Telegram.WebApp.expand();
+
+        console.log('Telegram WebApp version:', Telegram.WebApp.version);
+        console.log('InitDataUnsafe:', Telegram.WebApp.initDataUnsafe);
+
+        setGreeting();
     } else {
-        const titleElement = document.getElementById('title');
-        if (titleElement) {
-            titleElement.textContent = 'Приветствуем тебя, странник!';
-        }
+        titleElement.textContent = 'Приветствуем тебя, странник!';
     }
 });
 

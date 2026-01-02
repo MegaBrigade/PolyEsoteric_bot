@@ -106,7 +106,7 @@ body {
 
 #deck-view #title {
   font-family: "Gilroy-ExtraBold";
-  font-size: clamp(38px, 6vw, 48px);
+  font-size: clamp(24px, 6vw, 38px);
   color: #CFE7FF;
   line-height: 1;
   text-align: center;
@@ -231,7 +231,7 @@ body {
     transform: scale(1);
   }
   to {
-    transform: scale(1.2) translateY(10px);
+    transform: scale(1.15) translateY(10px);
   }
 }
 
@@ -262,9 +262,9 @@ body {
 }
 
 .result-card-display {
-  width: 207px;
-  height: 373px;
-  border-radius: 30px;
+  width: calc(207px * 0.9);
+  height: calc(373px * 0.9);
+  border-radius: calc(30px * 0.9);
   background: #6265FE;
   box-shadow: 0 12px 24px rgba(57, 35, 155, 0.329);
   overflow: hidden;

@@ -598,10 +598,24 @@ body{
   margin: 0;
 }
 
+/* .result-panel .button {
+  margin-top: 10px;
+} */
 .result-panel .button {
   margin-top: 10px;
+  font-size: clamp(16px, 3vw, 24px);
+  padding: clamp(14px, 3vw, 18px);
+  color: #CFE7FF;
+  background: #6265FE;
+  text-align: center;
 }
-
+.result-btn {
+  font-size: clamp(16px, 3vw, 24px) !important;
+  padding: clamp(14px, 3vw, 18px) !important;
+  color: #CFE7FF !important;
+  background: #6265FE !important;
+  display: block !important;
+}
 @media (max-height: 700px) {
   .result-title-outline {
     margin-top: 10px;
@@ -812,6 +826,7 @@ body{
     padding: 8px 15px;
     border-radius: 10px;
     font-size: clamp(12px, 2.5vw, 14px);
+    color:#E9F4FF;
   }
 }
 

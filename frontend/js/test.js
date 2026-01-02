@@ -81,21 +81,22 @@ const questions = [
     window.location.href = "index.html";
   });
 
-  function showQuestion(index) {
-    const question = questions[index];
-    document.querySelector('.question-number').textContent = question.number;
-    document.querySelector('.question-text').textContent = question.text;
-    const buttons = document.querySelectorAll('.button');
-    buttons.forEach((button, i) => {
-      button.textContent = question.options[i];
-      button.onclick = function(e) {
-        e.preventDefault();
-        handleAnswerSelect(i, question.options[i]);
-      };
-    });
-    updateProgressBar(index);
-  }
-
+function showQuestion(index) {
+  const question = questions[index];
+  document.querySelector('.question-number').textContent = question.number;
+  document.querySelector('.question-text').textContent = question.text;
+  
+  const buttons = questionScreen.querySelectorAll('.button');
+  
+  buttons.forEach((button, i) => {
+    button.textContent = question.options[i];
+    button.onclick = function(e) {
+      e.preventDefault();
+      handleAnswerSelect(i, question.options[i]);
+    };
+  });
+  updateProgressBar(index);
+}
   function handleAnswerSelect(optionIndex, answerText) {
     userAnswers[currentQuestionIndex] = {
       question: questions[currentQuestionIndex].text,
@@ -158,26 +159,7 @@ function restartTest() {
   }
 }
 
-  function restartTest() {
-    const activeResult = document.querySelector('.result-screen.active');
-    if (activeResult) {
-      activeResult.classList.remove('active');
-      
-      setTimeout(() => {
-        activeResult.style.display = 'none';
-
-        currentQuestionIndex = 0;
-        userAnswers = [];
-        
-        questionScreen.style.display = 'flex';
-        setTimeout(() => {
-          questionScreen.classList.add('active');
-          showQuestion(currentQuestionIndex);
-        }, 50);
-      }, 500);
-    }
-  }
-
+ 
   function adjustQuestionFontSizes() {
     const questionNumber = document.querySelector('.question-number');
     const questionText = document.querySelector('.question-text');

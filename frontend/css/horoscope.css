@@ -128,7 +128,11 @@ body{
   justify-content: center;
   margin: 80px auto 100px;
 }
-
+@media (min-width: 500px) {
+  .img {
+    margin: 40px auto 20px;
+  }
+}
 @media (min-width: 768px) {
   .img {
     margin: 60px auto 30px;
@@ -404,7 +408,7 @@ body{
     font-size: 18px;
     line-height: 1.6;
     max-width: 100%;
-    padding: 20px 40px;
+    padding: 10px 10px;
     box-sizing: border-box;
     text-align: justify;
 }

@@ -4,6 +4,8 @@ const magesButton = document.getElementById("buttonT");
 
 function updateDate() {
     const dateElement = document.querySelector('.date p');
+    if (!dateElement) return;
+
     const now = new Date();
     const months = [
         'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
@@ -14,39 +16,59 @@ function updateDate() {
 }
 
 function getTelegramDisplayName() {
-    if (window.Telegram?.WebApp?.initDataUnsafe?.user) {
-        const user = Telegram.WebApp.initDataUnsafe.user;
-        return user.username || user.first_name || 'странник';
+    if (!window.Telegram || !Telegram.WebApp) {
+        return 'странник';
     }
-    return 'странник';
+
+    const user = Telegram.WebApp.initDataUnsafe?.user;
+
+    if (!user) {
+        return 'странник';
+    }
+
+    return user.username || user.first_name || 'странник';
 }
 
 function setGreeting() {
     const titleElement = document.getElementById('title');
-    if (titleElement) {
-        titleElement.textContent = `Приветствуем тебя, ${getTelegramDisplayName()}!`;
-    }
+    if (!titleElement) return;
+
+    const name = getTelegramDisplayName();
+    titleElement.textContent = `Приветствуем тебя, ${name}!`;
+}
+
+function initializeTelegramWebApp() {
+    if (!window.Telegram || !Telegram.WebApp) return;
+
+    Telegram.WebApp.ready();
+    Telegram.WebApp.expand();
+
+    console.log('Telegram user:', Telegram.WebApp.initDataUnsafe?.user);
+
+    setGreeting();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     updateDate();
-    setGreeting();
 
     if (window.Telegram && Telegram.WebApp) {
-        Telegram.WebApp.ready();
-        Telegram.WebApp.expand();
-        console.log('Telegram WebApp:', Telegram.WebApp.platform);
+        initializeTelegramWebApp();
+    } else {
+        const titleElement = document.getElementById('title');
+        if (titleElement) {
+            titleElement.textContent = 'Приветствуем тебя, странник!';
+        }
     }
 });
 
-button.addEventListener('click', () => {
+button?.addEventListener('click', () => {
     window.location.href = 'horoscope.html';
 });
 
-tarotButton.addEventListener('click', () => {
+tarotButton?.addEventListener('click', () => {
     window.location.href = 'tarot.html';
 });
 
-magesButton.addEventListener('click', () => {
+magesButton?.addEventListener('click', () => {
     window.location.href = 'test.html';
 });

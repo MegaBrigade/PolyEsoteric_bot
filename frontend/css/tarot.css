@@ -231,7 +231,7 @@ body {
     transform: scale(1);
   }
   to {
-    transform: scale(1.3) translateY(10px);
+    transform: scale(1.2) translateY(10px);
   }
 }
 
@@ -262,9 +262,9 @@ body {
 }
 
 .result-card-display {
-  width: calc(207px * 1.2);
-  height: calc(373px * 1.2);
-  border-radius: calc(30px * 1.2);
+  width: 207px;
+  height: 373px;
+  border-radius: 30px;
   background: #6265FE;
   box-shadow: 0 12px 24px rgba(57, 35, 155, 0.329);
   overflow: hidden;

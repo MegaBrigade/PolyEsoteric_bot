@@ -1,5 +1,5 @@
 
-const BACKEND_URL = 'https://poly-esoteric-backend.onrender.com';
+const BACKEND_URL = 'https://polyesoteric-bot.onrender.com/api';
 
 function goBackToIndex(e) {
     if (e) {
@@ -46,7 +46,7 @@ async function getHoroscopeFromBackend(birthDate) {
     
     console.log('Отправка запроса к бэкенду с датой:', formattedDate);
     
-    const response = await fetch(`${BACKEND_URL}/api/horoscope`, {
+    const response = await fetch(`${BACKEND_URL}/horoscope`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -75,6 +75,7 @@ async function fetchHoroscopeWithLoading(birthDate) {
         
         console.log('Начало получения гороскопа...');
         const horoscopeData = await getHoroscopeFromBackend(birthDate);
+        console.log('Данные гороскопа получены:', horoscopeData);
 
         await new Promise(resolve => setTimeout(resolve, 1000));
         loader.style.display = 'none';
@@ -127,8 +128,8 @@ function showResult(horoscopeData, birthDate) {
         console.log('Получены данные для отображения:', horoscopeData);
         
         const zodiacSign = getZodiacSignByDate(birthDate);
-        const horoscopeText = horoscopeData.prediction;
-        const imageUrl = horoscopeData.image_url;
+        const horoscopeText = horoscopeData.prediction || horoscopeData.description;
+        const imageUrl = horoscopeData.image_url || horoscopeData.file_path;
         
         const zodiacDescriptionElement = document.getElementById('zodiacDescription');
         const resultElement = document.getElementById('result');
@@ -136,13 +137,14 @@ function showResult(horoscopeData, birthDate) {
         const imageContainer = document.querySelector('.image svg image');
         
         if (zodiacDescriptionElement && resultElement) {
-            zodiacDescriptionElement.textContent = horoscopeText;
+            zodiacDescriptionElement.textContent = horoscopeText || 'Описание временно недоступно';
             
             if (zodiacNameElement) {
                 zodiacNameElement.textContent = getZodiacSignName(zodiacSign);
             }
             
             if (imageUrl && imageContainer) {
+                console.log('Установка изображения знака:', imageUrl);
                 imageContainer.setAttribute('href', imageUrl);
                 imageContainer.setAttribute('xlink:href', imageUrl);
             }

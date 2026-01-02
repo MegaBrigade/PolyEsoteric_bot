@@ -18,14 +18,10 @@ welcom_msg = """
 def start(message):
     markup = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=3)
 
-    web_app = telebot.types.WebAppInfo(url="https://poly-esoteric-bot.vercel.app/")
-    btn_web_app = telebot.types.KeyboardButton(text="Открыть мини-приложение", web_app=web_app)
-
     btn_link = telebot.types.KeyboardButton(text="Github")
     btn_random = telebot.types.KeyboardButton(text="Случайное число")
     btn_guide = telebot.types.KeyboardButton(text="Книги о магии")
 
-    markup.add(btn_web_app)
     markup.add(btn_link, btn_random, btn_guide)
 
     bot.send_message(message.chat.id, welcom_msg, reply_markup=markup, parse_mode='HTML')
@@ -33,7 +29,8 @@ def start(message):
 @bot.message_handler(func=lambda message: True)
 def handle_messages(message):
     if message.text == "Github":
-        bot.send_message(message.chat.id, "Наш [GitHub](https://github.com/MegaBrigade/PolyEsoteric_bot/tree/main) всегда открыт для искателей 🌌",
+        bot.send_message(message.chat.id,
+                         "Наш [GitHub](https://github.com/MegaBrigade/PolyEsoteric_bot/tree/main) всегда открыт для искателей 🌌",
                          parse_mode='Markdown', disable_web_page_preview=True)
 
     elif message.text == "Случайное число":
@@ -43,7 +40,7 @@ def handle_messages(message):
     elif message.text == "Книги о магии":
         guides_msg = """
 ⭐️Справочники по эзотерике и магии:
-        
+
     📎 <u>Андрей Костенко</u>
 Таро Уэйта как система. Теория и практика
     📎 <u>Эдуард Леванов</u>

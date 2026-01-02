@@ -1,8 +1,8 @@
 :root {
-  --bg-top:#090D19;
-  --bg-mid:#6265FE;
-  --bg-bottom:#CFE7FF;
-  --accent:#B6BBFF;
+  --bg-top: #090D19;
+  --bg-mid: #6265FE;
+  --bg-bottom: #CFE7FF;
+  --accent: #B6BBFF;
   --glass-border: rgba(255,255,255,0.1);
 }
 
@@ -22,75 +22,97 @@
   font-display: swap;
 }
 
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;width:100%}
-body{
-  background: linear-gradient(180deg,#6265FE 4%,#B6BBFF 66%,#CFE7FF 100%);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  color:#fff;
-  overflow-x:hidden;
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; width: 100%; }
+
+body {
+  background: linear-gradient(180deg, #6265FE 4%, #B6BBFF 66%, #CFE7FF 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  color: #fff;
+  overflow-x: hidden;
+  font-family: "Geologica", sans-serif;
 }
 
 .phone {
-  width:100%;
-  height:100%;
-  position:relative;
-  overflow:hidden;
-  margin:0 auto;
-  border-radius:30px;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
 }
 
 .header {
-  position:relative;
-  display:flex;
-  flex-direction:column;
-  padding: clamp(20px,4vw,40px) clamp(10px,6vw,40px) 0;
-  width:100%;
-  flex-shrink:0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(20px, 4vw, 40px) clamp(10px, 6vw, 40px) 0;
+  width: 100%;
+  flex-shrink: 0;
+  z-index: 10;
 }
 
-.logo{
-  font-family:"Lobelia",sans-serif;
+.logo {
+  font-family: "Lobelia", sans-serif;
   font-size: 18px;
-  font-weight:400;
-  letter-spacing:1px;
-  line-height:1;
-  text-transform:uppercase;
-  color:#CFE7FF;
-  width:max-content;
+  font-weight: 400;
+  letter-spacing: 1px;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #CFE7FF;
+  width: max-content;
 }
 
 .arrow {
   border: none;
   background: none;
-  position:absolute;
-  right:clamp(20px,4vw,40px);
-  width:clamp(50px,10vw,70px);
-  height:clamp(50px,10vw,70px);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:0;
-  opacity:0.9;
+  position: absolute;
+  right: clamp(20px, 4vw, 40px);
+  width: clamp(50px, 10vw, 70px);
+  height: clamp(50px, 10vw, 70px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  opacity: 0.9;
   cursor: pointer;
 }
+.arrow svg { width: 100%; height: 100%; }
 
-.arrow svg {width:100%;height:100%;}
+.view-section {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s;
+  padding-top: 100px;
+}
 
-#title{
-    font-family: "Gilroy-ExtraBold";
-    font-size:clamp(38px,6vw,48px);
-    color: #CFE7FF;
-    line-height: 1;
-    text-align: center;
-    margin-top: 30px;
-    margin-bottom: clamp(20px,3vw,100px);
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+}
+
+#deck-view #title {
+  font-family: "Gilroy-ExtraBold";
+  font-size: clamp(38px, 6vw, 48px);
+  color: #CFE7FF;
+  line-height: 1;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: clamp(20px, 3vw, 100px);
+  transition: text-align 0.3s;
 }
 
 .cards {
@@ -99,7 +121,7 @@ body{
   justify-content: center;
   align-items: center;
   height: 100%;
-  margin-top: -30px;
+  margin-top: -50px; 
 }
 
 .card {
@@ -121,7 +143,6 @@ body{
   transform: rotate(-15deg) translate(-25px, 20px);
   animation: flyLeft 0.8s ease-out 0.2s forwards;
 }
-
 .card-bg:not(.rotated) {
   transform: rotate(15deg) translate(25px, 20px);
   animation: flyRight 0.8s ease-out 0.2s forwards;
@@ -129,26 +150,13 @@ body{
 
 .card-bg svg {
   transform-origin: center center;
-}
-
-.card-bg.rotated svg {
-  transform: rotate(-16deg);
   display: block;
   width: 140%;
   height: 140%;
   border-radius: inherit;
   object-fit: cover;
   overflow: hidden;
-}
-
-.card-bg:not(.rotated) svg {
   transform: rotate(-16deg);
-  display: block;
-  width: 140%;
-  height: 140%;
-  border-radius: inherit;
-  object-fit: cover;
-  overflow: hidden;
 }
 
 .main-card {
@@ -163,9 +171,7 @@ body{
   overflow: hidden;
 }
 
-.main-card:hover {
-  transform: scale(1.02);
-}
+.main-card:hover { transform: scale(1.02); }
 
 .card-svg {
   display: block;
@@ -176,15 +182,7 @@ body{
   overflow: hidden;
 }
 
-.screen {
-  animation: fadeIn 0.5s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
+/* Анимации Keyframes */
 @keyframes flyLeft {
   from {
     transform: translate(0, 0) rotate(0deg);
@@ -251,43 +249,111 @@ body{
   z-index: 3;
 }
 
-.result-screen {
-  position: absolute;
-  inset: 0;
+#result-view {
+  padding-top: 80px;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+  position: relative;
+  flex-grow: 1;
+}
+
+.result-card-display {
+  width: calc(207px * 1.2);
+  height: calc(373px * 1.2);
+  border-radius: calc(30px * 1.2);
+  background: #6265FE;
+  box-shadow: 0 12px 24px rgba(57, 35, 155, 0.329);
+  overflow: hidden;
+  position: relative;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.panel {
+  border-radius: clamp(35px, 4vw, 50px) clamp(35px, 4vw, 50px) 0 0;
+  padding: clamp(30px, 5vw, 20px);
+  background: rgba(190, 243, 223, 0.15);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px) saturate(120%);
+  -webkit-backdrop-filter: blur(10px) saturate(120%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 8px 30px rgba(14, 16, 40, 0.35);
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 10px;
   justify-content: center;
-  background: linear-gradient(180deg,#6265FE 4%,#B6BBFF 66%,#CFE7FF 100%);
-  color: #CFE7FF;
-  text-align: center;
-  padding: 20px;
-  animation: fadeIn 0.5s ease-in-out;
-  z-index: 5;
+  align-items: center;
+  position: relative;
+  margin-top: auto;
+  flex-shrink: 0;
+  min-height: 25vh;
 }
 
-.result-screen.hidden {
-  display: none;
-}
-
-#cardImage {
-  width: 200px;
-  height: auto;
-  margin: 20px 0;
-}
-
-#backButton {
-  margin-top: 20px;
-  background: #CFE7FF;
+.card-meaning {
+  font-family: "Geologica", sans-serif;
+  font-weight: 700;
+  font-size: clamp(20px, 3vw, 28px);
   color: #6265FE;
-  border: none;
-  border-radius: 12px;
-  padding: 10px 20px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: transform 0.2s ease;
+  max-width: 600px;
+  text-align: center;
+  line-height: 1.4;
 }
 
-#backButton:hover {
-  transform: scale(1.05);
+@keyframes slideUpPanel {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes cardReveal {
+  0% {
+    transform: scale(0.8) translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInText {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.panel.slide-up {
+  animation: slideUpPanel 0.6s ease-out forwards;
+  transform-origin: bottom center;
+}
+
+.result-card-display.reveal {
+  animation: cardReveal 0.6s ease-out 0.2s forwards;
+  opacity: 0;
+}
+
+.card-meaning.fade-in {
+  animation: fadeInText 0.5s ease-out 0.6s forwards;
+  opacity: 0;
+}
+
+.panel.slide-down {
+  animation: slideUpPanel 0.4s ease-out reverse forwards;
+}
+
+.result-card-display.hide {
+  animation: cardReveal 0.4s ease-out reverse forwards;
 }

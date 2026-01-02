@@ -81,7 +81,6 @@ function initializeTelegramWebApp() {
         console.log('Telegram Web App initialized');
         Telegram.WebApp.ready();
         Telegram.WebApp.expand();
-        
         const titleElement = document.getElementById('title');
         if (titleElement) {
             titleElement.textContent = createPersonalizedGreeting();
@@ -109,6 +108,10 @@ function initializeApp() {
 }
 
 document.addEventListener('DOMContentLoaded', initializeApp);
+
+button.addEventListener('click', async () => {
+    window.location.href = 'horoscope.html';
+});
 
 tarotButton.addEventListener('click', async () => {
     window.location.href = 'tarot.html';

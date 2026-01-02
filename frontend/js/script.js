@@ -1,49 +1,6 @@
 const button = document.getElementById("buttonG");
-const response = document.getElementById("title");
 const tarotButton = document.getElementById("buttonCard");
 const magesButton = document.getElementById("buttonT");
-
-function getTelegramUserInfo() {
-    try {
-        if (window.Telegram && Telegram.WebApp) {
-            const initData = Telegram.WebApp.initData;
-            const initDataUnsafe = Telegram.WebApp.initDataUnsafe;
-            
-            console.log('InitData:', initData);
-            console.log('InitDataUnsafe:', initDataUnsafe);
-            
-            if (initDataUnsafe && initDataUnsafe.user) {
-                const user = initDataUnsafe.user;
-                return {
-                    username: user.username,
-                    firstName: user.first_name,
-                    lastName: user.last_name,
-                    userId: user.id,
-                    exists: true
-                };
-            }
-            
-            if (initData) {
-                const params = new URLSearchParams(initData);
-                const userParam = params.get('user');
-                if (userParam) {
-                    const user = JSON.parse(decodeURIComponent(userParam));
-                    return {
-                        username: user.username,
-                        firstName: user.first_name,
-                        lastName: user.last_name,
-                        userId: user.id,
-                        exists: true
-                    };
-                }
-            }
-        }
-    } catch (error) {
-        console.error('Error getting Telegram user info:', error);
-    }
-    
-    return { exists: false };
-}
 
 function updateDate() {
     const dateElement = document.querySelector('.date p');
@@ -52,71 +9,44 @@ function updateDate() {
         'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
         'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
     ];
-    
-    const month = months[now.getMonth()];
-    const day = now.getDate();
-    dateElement.textContent = `${month}, ${day}`;
+
+    dateElement.textContent = `${months[now.getMonth()]}, ${now.getDate()}`;
 }
 
-function createPersonalizedGreeting() {
-    const userInfo = getTelegramUserInfo();
-    
-    if (userInfo.exists) {
-        const userName = userInfo.firstName || userInfo.username || 'странник';
-        const greetings = [
-            `Услышь зов судьбы, ${userName}`,
-            `${userName}, судьба готовит тебе небольшой подарок!`,
-            `Привет, ${userName}! Луна сегодня красивая, правда?`,
-            `${userName}, давай узнаем твое будущее!`,
-            `Судьба шепчет тебе, ${userName}...`
-        ];
-        
-        return greetings[Math.floor(Math.random() * greetings.length)];
+function getTelegramDisplayName() {
+    if (window.Telegram?.WebApp?.initDataUnsafe?.user) {
+        const user = Telegram.WebApp.initDataUnsafe.user;
+        return user.username || user.first_name || 'странник';
     }
-    return 'Приветствуем тебя, странник!';
+    return 'странник';
 }
 
-function initializeTelegramWebApp() {
+function setGreeting() {
+    const titleElement = document.getElementById('title');
+    if (titleElement) {
+        titleElement.textContent = `Приветствуем тебя, ${getTelegramDisplayName()}!`;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    updateDate();
+    setGreeting();
+
     if (window.Telegram && Telegram.WebApp) {
-        console.log('Telegram Web App initialized');
         Telegram.WebApp.ready();
         Telegram.WebApp.expand();
-        const titleElement = document.getElementById('title');
-        if (titleElement) {
-            titleElement.textContent = createPersonalizedGreeting();
-        }
+        console.log('Telegram WebApp:', Telegram.WebApp.platform);
     }
-}
+});
 
-function initializeApp() {
-    updateDate();
-    
-    const userInfo = getTelegramUserInfo();
-    console.log('Telegram User Info:', userInfo);
-    
-    const titleElement = document.getElementById('title');
-    titleElement.textContent = createPersonalizedGreeting();
-    
-    const isInTelegram = !!(window.Telegram && Telegram.WebApp);
-    console.log('Запущено в Telegram Web App:', isInTelegram);
-    
-    if (isInTelegram) {
-        console.log('Версия Telegram Web App:', Telegram.WebApp.version);
-        console.log('Платформа:', Telegram.WebApp.platform);
-        initializeTelegramWebApp();
-    }
-}
-
-document.addEventListener('DOMContentLoaded', initializeApp);
-
-button.addEventListener('click', async () => {
+button.addEventListener('click', () => {
     window.location.href = 'horoscope.html';
 });
 
-tarotButton.addEventListener('click', async () => {
+tarotButton.addEventListener('click', () => {
     window.location.href = 'tarot.html';
 });
 
-magesButton.addEventListener('click', async () => {
+magesButton.addEventListener('click', () => {
     window.location.href = 'test.html';
 });

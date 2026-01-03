@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const telegramUserId = tg?.initDataUnsafe?.user?.id || 'guest';
 
     const DAILY_CARD_KEY = `daily_tarot_card_${telegramUserId}`;
-
+    
     const deckView = document.getElementById('deck-view');
     const resultView = document.getElementById('result-view');
 
@@ -150,26 +150,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     returnButton.addEventListener("click", () => {
         if (!resultView.classList.contains('hidden')) {
-            panel.classList.remove('slide-up');
-            panel.classList.add('slide-down');
+            resultView.classList.add('hidden');
+            deckView.classList.remove('hidden');
 
-            resultCardDisplay.classList.remove('reveal');
-            resultCardDisplay.classList.add('hide');
+            cardsContainer.classList.remove("open");
+            titleElement.textContent = "Нажми, чтобы открыть карту!";
+            isDeckOpen = false;
 
-            resultMeaningText.classList.remove('fade-in');
-
-            setTimeout(() => {
-                resultView.classList.add('hidden');
-                deckView.classList.remove('hidden');
-
-                cardsContainer.classList.remove("open");
-                titleElement.textContent = "Нажми, чтобы открыть карту!";
-                isDeckOpen = false;
-
-                resetResultAnimations();
-                resultMeaningText.textContent = "Значение карты";
-                resultCardImage.setAttribute('href', 'assets/card.svg');
-            }, 400);
+            resetResultAnimations();
+            resultMeaningText.textContent = "Значение карты";
+            resultCardImage.setAttribute('href', 'assets/card.svg');
         } else {
             window.location.href = "index.html";
         }

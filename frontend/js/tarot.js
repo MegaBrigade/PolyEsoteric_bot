@@ -27,9 +27,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const API_URL = 'https://polyesoteric-bot.onrender.com/api/card';
 
     function getTodayKey() {
-        return new Date().toISOString().split('T')[0];
-    }
+        const now = new Date();
+        const year  = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day   = String(now.getDate()).padStart(2, '0');
 
+        return `${year}-${month}-${day}`;
+    }
+    
     function saveDailyCard(cardData) {
         localStorage.setItem(DAILY_CARD_KEY, JSON.stringify({
             date: getTodayKey(),

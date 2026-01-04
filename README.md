@@ -44,3 +44,4 @@ https://t.me/PolyEsoteric_bot
 ## База данных
 > Хранит данные, передающееся пользователю. Связана с SupaBase.
 # Демонстрация работы приложения
+<img width="534" height="167" alt="image" src="https://github.com/user-attachments/assets/111b196c-969d-4329-abef-8ff6fb96f152" />

@@ -1,7 +1,7 @@
 # PolyEsoteric_bot
 > Этот репозиторий содержит код курсовой работы по дисциплине "Конструирование программного обеспечения"
 
-https://t.me/PolyEsoteric_bot
+https://t.me/PolyEsoteric_bot - ссылка на telegram бота, который позволяет открыть telegram mini app.
 
 # Участники проекта
 Резникова Анна Романовна 5130904/30101
@@ -44,12 +44,16 @@ https://t.me/PolyEsoteric_bot
 ## База данных
 > Хранит данные, передающееся пользователю. Связана с SupaBase.
 # Ссылки на произведенные продукты проекта
-https://t.me/PolyEsoteric_bot
-https://www.figma.com/design/TiptiQlC91yXfZiX9gtgCP/PolyEsoteric?node-id=7-49&t=jwYgPM7tAidQr0Fj-1
+> https://t.me/PolyEsoteric_bot
+
+> https://www.figma.com/design/TiptiQlC91yXfZiX9gtgCP/PolyEsoteric?node-id=7-49&t=jwYgPM7tAidQr0Fj-1
 # Демонстрация работы приложения
 ## Вид меню в telegram боте.
+
 <img width="534" height="167" alt="image" src="https://github.com/user-attachments/assets/111b196c-969d-4329-abef-8ff6fb96f152" />
+
 ## Главное меню приложения
+
 <img width="621" height="1021" alt="image" src="https://github.com/user-attachments/assets/37e0d264-e5bb-4914-9651-2f27cda0ad44" />
 
 ## Карта дня

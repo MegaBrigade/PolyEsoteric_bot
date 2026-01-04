@@ -43,25 +43,31 @@ https://t.me/PolyEsoteric_bot
 
 ## База данных
 > Хранит данные, передающееся пользователю. Связана с SupaBase.
+# Ссылки на произведенные продукты проекта
+https://t.me/PolyEsoteric_bot
+https://www.figma.com/design/TiptiQlC91yXfZiX9gtgCP/PolyEsoteric?node-id=7-49&t=jwYgPM7tAidQr0Fj-1
 # Демонстрация работы приложения
-Вид меню в telegram боте.
+## Вид меню в telegram боте.
 <img width="534" height="167" alt="image" src="https://github.com/user-attachments/assets/111b196c-969d-4329-abef-8ff6fb96f152" />
-Главное меню приложения
+## Главное меню приложения
 <img width="621" height="1021" alt="image" src="https://github.com/user-attachments/assets/37e0d264-e5bb-4914-9651-2f27cda0ad44" />
 
-Карта дня
+## Карта дня
+
 <img width="628" height="1026" alt="image" src="https://github.com/user-attachments/assets/ff114d96-6ba1-4679-9c77-ac7b6b551c70" />
 
 <img width="620" height="1020" alt="image" src="https://github.com/user-attachments/assets/af178638-9053-42f4-95b1-e281c728d506" />
 
-Гороскоп
+## Гороскоп
+
 <img width="605" height="956" alt="image" src="https://github.com/user-attachments/assets/d56a8df6-4f0a-42c4-a195-0de837fc0472" />
 
 <img width="596" height="954" alt="image" src="https://github.com/user-attachments/assets/9107d12b-45a5-431b-a16f-5b1a832826ed" />
 
 <img width="613" height="957" alt="image" src="https://github.com/user-attachments/assets/6808dd3c-fb19-411e-b022-291d4ab523ec" />
 
-Тест
+## Тест
+
 <img width="607" height="950" alt="image" src="https://github.com/user-attachments/assets/057ca9a3-84cb-4c60-a942-a929dfe88d7e" />
 
 <img width="597" height="946" alt="image" src="https://github.com/user-attachments/assets/b2420482-a0d0-47ca-88ba-ec75e474d30c" />
@@ -70,4 +76,4 @@ https://t.me/PolyEsoteric_bot
 
 <img width="1901" height="1189" alt="image" src="https://github.com/user-attachments/assets/ce4b1a17-733f-4166-8212-722433faf80a" />
 
-# Ссылки на произведенные продукты проекта
+

@@ -619,7 +619,7 @@ body{
 @media (max-height: 700px) {
   .result-title-outline {
     margin-top: 10px;
-    font-size: clamp(35px, 7vw, 38px);
+    font-size: clamp(35px, 7vw, 36px);
     -webkit-text-stroke: 1.5px #6265FE;
     text-stroke: 1.5px #6265FE;
   }
@@ -800,7 +800,7 @@ body{
   }
   
   .result-title-outline {
-    font-size: clamp(25px, 6vw, 40px);
+    font-size: clamp(25px, 6vw, 33px);
     margin-top: 10px;
     letter-spacing: 1px;
     -webkit-text-stroke: 0.7px #6265FE;

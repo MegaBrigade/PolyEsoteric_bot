@@ -673,11 +673,15 @@ body{
   .result-description {
     font-size: clamp(11px, 2vw, 14px);
   }
+
+  .button {
+    font-size: clamp(11px, 2vw, 14px);
+  }
 }
 .dark-mage-result {
   background: linear-gradient(180deg, #B6BBFF 0%, #C7EDEF 30%, #949FD6 100%);
 }
-@media (max-height: 400px) {
+@media (max-height: 600px) {
   body {
     padding: 5px;
   }
@@ -731,7 +735,7 @@ body{
   
   .button {
     padding: clamp(10px, 2vw, 14px);
-    font-size: clamp(12px, 2.5vw, 16px);
+    font-size: clamp(12px, 2.5vw, 13px);
     min-height: 40px;
     border-radius: 50px;
   }

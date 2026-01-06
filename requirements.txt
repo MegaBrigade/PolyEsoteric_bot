@@ -8,3 +8,4 @@ translate
 supabase
 deep-translator
 datetime
+pytest

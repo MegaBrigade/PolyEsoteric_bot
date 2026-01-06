@@ -708,7 +708,7 @@ body{
   }
   
   .question-number {
-    font-size: clamp(15px, 2.5vh, 25px);
+    font-size: clamp(15px, 2.5vh, 35px);
     margin-top: 2px;
     max-height: 8vh;
     -webkit-text-stroke: 0.7px #6265FE;
@@ -716,7 +716,7 @@ body{
   }
   
   .question-text {
-    font-size: clamp(16px, 3vh, 25px);
+    font-size: clamp(18px, 3vh, 30px);
     margin-bottom: 2px;
     max-height: 10vh;
     line-height: 1;

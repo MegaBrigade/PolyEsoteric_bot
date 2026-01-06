@@ -363,13 +363,13 @@ body{
 
 @media (max-height: 600px) {
   .question-number {
-    font-size: clamp(20px, 3vh, 40px);
+    font-size: clamp(20px, 3vh, 30px);
     margin-top: 2px;
     max-height: 10vh;
   }
   
   .question-text {
-    font-size: clamp(18px, 3.5vh, 35px);
+    font-size: clamp(18px, 3.5vh, 25px);
     margin-bottom: 2px;
     max-height: 12vh;
     line-height: 1;
@@ -619,7 +619,7 @@ body{
 @media (max-height: 700px) {
   .result-title-outline {
     margin-top: 10px;
-    font-size: clamp(35px, 7vw, 70px);
+    font-size: clamp(35px, 7vw, 60px);
     -webkit-text-stroke: 1.5px #6265FE;
     text-stroke: 1.5px #6265FE;
   }
@@ -639,7 +639,7 @@ body{
 @media (max-height: 600px) {
   .result-title-outline {
     margin-top: 5px;
-    font-size: clamp(30px, 6vw, 60px);
+    font-size: clamp(30px, 6vw, 45px);
     -webkit-text-stroke: 1px #6265FE;
     text-stroke: 1px #6265FE;
   }
@@ -660,7 +660,7 @@ body{
 @media (max-height: 500px) {
   .result-title-outline {
     margin-top: 2px;
-    font-size: clamp(25px, 5vw, 50px);
+    font-size: clamp(25px, 5vw, 35px);
   }
   
   .result-panel {
